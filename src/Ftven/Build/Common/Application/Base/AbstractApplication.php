@@ -43,6 +43,8 @@ abstract class AbstractApplication extends Application
         if (is_file(getcwd() . '/box.json') && is_file(getcwd() . '/bin/box')) {
             $commands[] = new PackageCommand();
         }
+
+        return $commands;
     }
     /**
      * @return array|Command[]
