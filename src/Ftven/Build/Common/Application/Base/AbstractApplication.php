@@ -2,6 +2,7 @@
 
 namespace Ftven\Build\Common\Application\Base;
 
+use Ftven\Build\Common\Command\PackageCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Application;
 
@@ -35,9 +36,13 @@ abstract class AbstractApplication extends Application
      */
     protected function registerCommonCommands()
     {
-        return [
+        $commands = [
             new UpdateCommand(),
         ];
+
+        if (is_file(getcwd() . '/box.json') && is_file(getcwd() . '/bin/box')) {
+            $commands[] = new PackageCommand();
+        }
     }
     /**
      * @return array|Command[]
