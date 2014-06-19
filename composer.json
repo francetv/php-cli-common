@@ -1,0 +1,41 @@
+{
+    "name": "ftven/cli-common",
+    "require": {
+        "php": ">= 5.4.24",
+        "symfony/dependency-injection": "*",
+        "symfony/http-foundation": "*",
+        "symfony/filesystem": "*",
+        "symfony/console": "*",
+        "symfony/config": "*",
+        "symfony/finder": "*",
+        "symfony/yaml": "*",
+        "guzzlehttp/guzzle": "*",
+        "twig/twig" : "*",
+        "videlalvaro/php-amqplib": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "herrera-io/phar-update": "*",
+        "kherge/box": "*"
+    },
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Olivier Hoareau",
+            "email": "olivier@phppro.fr"
+        },
+        {
+            "name": "Gaël Métais",
+            "email": "gael.metais@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
