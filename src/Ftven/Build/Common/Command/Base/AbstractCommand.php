@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 abstract class AbstractCommand extends Command
@@ -76,6 +77,27 @@ abstract class AbstractCommand extends Command
 
             return $answer;
         });
+
+        $question->setMaxAttempts(3);
+
+        $response = $q->ask($input, $output, $question);
+
+        return $response;
+    }
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @param $message
+     * @param bool  $default
+     *
+     * @return string
+     */
+    protected function confirm(InputInterface $input, OutputInterface $output, $message, $default = null)
+    {
+        /** @var QuestionHelper $q */
+        $q = $this->getHelperSet()->get('question');
+
+        $question = new ConfirmationQuestion($message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ', true === $default);
 
         $question->setMaxAttempts(3);
 
