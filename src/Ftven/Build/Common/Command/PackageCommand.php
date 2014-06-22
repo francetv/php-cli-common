@@ -61,7 +61,7 @@ class PackageCommand extends AbstractCommand
                 $file = 'ftven-' . $app->getType();
             }
             if (true === is_file($install)) {
-                if (false === $this->confirm($input, $output, "File '%s' already exist, do you want to replace it with new version", true)) {
+                if (false === $this->confirm($input, $output, sprintf("File '%s' already exist, do you want to replace it with new version", $install), true)) {
                     return;
                 }
             }
