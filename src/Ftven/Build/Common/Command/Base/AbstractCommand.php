@@ -97,7 +97,7 @@ abstract class AbstractCommand extends Command
         /** @var QuestionHelper $q */
         $q = $this->getHelperSet()->get('question');
 
-        $question = new ConfirmationQuestion($message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ', true === $default);
+        $question = new ConfirmationQuestion($message . ($default ? (sprintf(' [%s]', $default ? 'yes' : 'no')) : '') . ' : ', true === $default);
 
         $question->setMaxAttempts(3);
 
