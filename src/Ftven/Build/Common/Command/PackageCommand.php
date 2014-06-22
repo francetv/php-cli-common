@@ -15,10 +15,12 @@ class PackageCommand extends AbstractCommand
      */
     protected function configure()
     {
+        /** @var AbstractApplication $app */
+        $app = $this->getApplication();
         $this
             ->setName('package')
             ->setDescription('Packages the tool to a phar')
-            ->addOption('install', null, InputOption::VALUE_OPTIONAL, "Optionnally install the newly created phar into the system directory", '/usr/local/bin/' . $this->getType())
+            ->addOption('install', null, InputOption::VALUE_OPTIONAL, "Optionnally install the newly created phar into the system directory", '/usr/local/bin/' . $app->getType())
         ;
     }
     /**
