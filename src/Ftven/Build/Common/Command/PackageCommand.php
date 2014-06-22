@@ -15,12 +15,10 @@ class PackageCommand extends AbstractCommand
      */
     protected function configure()
     {
-        /** @var AbstractApplication $app */
-        $app = $this->getApplication();
         $this
             ->setName('package')
             ->setDescription('Packages the tool to a phar')
-            ->addOption('install', null, InputOption::VALUE_OPTIONAL, "Optionnally install the newly created phar into the system directory", '/usr/local/bin/' . $app->getType())
+            ->addOption('install', null, InputOption::VALUE_OPTIONAL, "Optionnally install the newly created phar into the system directory", '/usr/local/bin/%name%')
         ;
     }
     /**
@@ -35,8 +33,12 @@ class PackageCommand extends AbstractCommand
     {
         $install = null;
 
+        /** @var AbstractApplication $app */
+        $app = $this->getApplication();
+
         if (true === $input->hasOption('install')) {
             $install = $input->getOption('install');
+            $install = str_replace('%name%', $app->getType(), $install);
         }
 
         $return = 0;
@@ -53,13 +55,9 @@ class PackageCommand extends AbstractCommand
                 if (true === is_array($box) && true === isset($box['output'])) {
                     $file = $box['output'];
                 } else {
-                    /** @var AbstractApplication $app */
-                    $app = $this->getApplication();
                     $file = 'ftven-' . $app->getType();
                 }
             } else {
-                /** @var AbstractApplication $app */
-                $app = $this->getApplication();
                 $file = 'ftven-' . $app->getType();
             }
             if (true === is_file($install)) {
