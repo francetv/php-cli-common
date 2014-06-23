@@ -260,4 +260,34 @@ abstract class AbstractCommand extends Command
     {
         return null !== $this->getInput()->getOption($name);
     }
+    /**
+     * @param string $cmd
+     * @param bool   $passthru
+     *
+     * @return array|null|string
+     *
+     * @throws \RuntimeException
+     */
+    protected function shell($cmd, $passthru = false)
+    {
+        $out = [];
+        $return = 0;
+
+        if (true === $passthru) {
+            passthru(sprintf('%s 2>&1'), $return);
+            $out = null;
+        } else {
+            exec(sprintf('%s 2>&1'), $out, $return);
+            $out = join(PHP_EOL, $out);
+            if ($this->getOutput()->getVerbosity() >= OutputInterface::VERBOSITY_VERY_VERBOSE) {
+                $this->getOutput()->writeln($out);
+            }
+        }
+
+        if (0 < $return) {
+            throw new \RuntimeException(sprintf("Error when executing '%s'", $cmd), 50);
+        }
+
+        return $out;
+    }
 }
