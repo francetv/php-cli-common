@@ -13,12 +13,59 @@ use Symfony\Component\Console\Question\Question;
 abstract class AbstractCommand extends Command
 {
     /**
+     * @var InputInterface
+     */
+    protected $input;
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
+    /**
+     * @param InputInterface $input
+     *
+     * @return $this
+     */
+    public function setInput($input)
+    {
+        $this->input = $input;
+
+        return $this;
+    }
+    /**
+     * @return InputInterface
+     */
+    public function getInput()
+    {
+        return $this->input;
+    }
+    /**
+     * @param OutputInterface $output
+     *
+     * @return $this
+     */
+    public function setOutput($output)
+    {
+        $this->output = $output;
+
+        return $this;
+    }
+    /**
+     * @return OutputInterface
+     */
+    public function getOutput()
+    {
+        return $this->output;
+    }
+    /**
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         parent::initialize($input, $output);
+
+        $this->setInput($input);
+        $this->setOutput($output);
 
         if (!ini_get('date.timezone')) {
             ini_set('date.timezone', 'Europe/Paris');
@@ -135,5 +182,22 @@ abstract class AbstractCommand extends Command
         }
 
         return $this;
+    }
+    /**
+     * @return int
+     */
+    protected function process()
+    {
+        return 0;
+    }
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return int|null|void
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        return $this->process();
     }
 }
