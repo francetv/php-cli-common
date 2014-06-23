@@ -200,4 +200,14 @@ abstract class AbstractCommand extends Command
     {
         return $this->process();
     }
+    /**
+     * @param string $name
+     * @param array  $params
+     *
+     * @return $this
+     */
+    protected function command($name, $params = [])
+    {
+        return $this->executeCommand($this->getOutput(), $name, $params);
+    }
 }
