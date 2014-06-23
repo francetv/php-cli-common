@@ -290,4 +290,51 @@ abstract class AbstractCommand extends Command
 
         return $out;
     }
+    /**
+     * @param string $pattern
+     *
+     * @return string
+     */
+    protected function _($pattern)
+    {
+        return call_user_func_array('sprintf', func_get_args());
+    }
+    /**
+     * @param string $name
+     * @param mixed  $defaultValue
+     *
+     * @return null|string
+     */
+    protected function env($name, $defaultValue = null)
+    {
+        $value = getenv($name);
+
+        if (null === $value || false === $value) {
+            return $defaultValue;
+        }
+
+        return $value;
+    }
+    /**
+     * @param string $msg
+     *
+     * @return $this
+     */
+    protected function out($msg)
+    {
+        $this->getOutput()->write(call_user_func_array([$this, '_'], func_get_args()));
+
+        return $this;
+    }
+    /**
+     * @param string $msg
+     *
+     * @return $this
+     */
+    protected function outln($msg)
+    {
+        $this->getOutput()->writeln(call_user_func_array([$this, '_'], func_get_args()));
+
+        return $this;
+    }
 }
