@@ -274,10 +274,10 @@ abstract class AbstractCommand extends Command
         $return = 0;
 
         if (true === $passthru) {
-            passthru(sprintf('%s 2>&1'), $return);
+            passthru(sprintf('%s 2>&1', $cmd), $return);
             $out = null;
         } else {
-            exec(sprintf('%s 2>&1'), $out, $return);
+            exec(sprintf('%s 2>&1', $cmd), $out, $return);
             $out = join(PHP_EOL, $out);
             if ($this->getOutput()->getVerbosity() >= OutputInterface::VERBOSITY_VERY_VERBOSE) {
                 $this->getOutput()->writeln($out);
