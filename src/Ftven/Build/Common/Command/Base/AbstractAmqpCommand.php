@@ -215,7 +215,7 @@ abstract class AbstractAmqpCommand extends AbstractCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
-    protected abstract function process(AMQPChannel $channel, InputInterface $input, OutputInterface $output);
+    protected abstract function processAmqp(AMQPChannel $channel, InputInterface $input, OutputInterface $output);
     /**
      * @param AMQPConnection $connection
      *
@@ -259,7 +259,7 @@ abstract class AbstractAmqpCommand extends AbstractCommand
             $this->createQueue($channel, $name, $options);
         }
 
-        $messages = $this->process($channel, $input, $output);
+        $messages = $this->processAmqp($channel, $input, $output);
 
         if (true === is_array($messages)) {
             $this->sendMessages($channel, $messages);
