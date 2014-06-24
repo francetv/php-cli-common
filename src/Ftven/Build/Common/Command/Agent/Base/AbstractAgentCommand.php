@@ -37,7 +37,7 @@ abstract class AbstractAgentCommand extends AbstractAmqpCommand
      *
      * @return array
      */
-    protected function process(AMQPChannel $channel, InputInterface $input, OutputInterface $output)
+    protected function processAmqp(AMQPChannel $channel, InputInterface $input, OutputInterface $output)
     {
         while (count($channel->callbacks)) {
             $channel->wait();
