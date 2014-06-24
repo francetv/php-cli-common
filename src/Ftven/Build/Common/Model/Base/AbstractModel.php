@@ -188,7 +188,7 @@ abstract class AbstractModel implements \ArrayAccess
             throw new \RuntimeException(sprintf("Unknown %s item with id '%s'", $type, $id), 404);
         }
 
-        return $this->$type[$id];
+        return $items[$id];
     }
     /**
      * @param string $type
