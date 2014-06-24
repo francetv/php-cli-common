@@ -182,7 +182,9 @@ abstract class AbstractModel implements \ArrayAccess
      */
     protected function getTypeById($type, $id)
     {
-        if (false === isset($this->$type[$id])) {
+        $items = isset($this->$type) ? $this->$type : [];
+
+        if (false === isset($items[$id])) {
             throw new \RuntimeException(sprintf("Unknown %s item with id '%s'", $type, $id), 404);
         }
 
