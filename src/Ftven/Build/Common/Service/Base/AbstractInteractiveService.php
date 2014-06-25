@@ -64,4 +64,18 @@ abstract class AbstractService implements ServiceInterface
     {
         return $this->output;
     }
+    /**
+     * @param string $msg
+     */
+    protected function outln($msg)
+    {
+        $this->getOutput()->writeln(call_user_func_array('sprintf', func_get_args()));
+    }
+    /**
+     * @param string $msg
+     */
+    protected function out($msg)
+    {
+        $this->getOutput()->write(call_user_func_array('sprintf', func_get_args()));
+    }
 }
