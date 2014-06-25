@@ -3,15 +3,25 @@
 namespace Ftven\Build\Common\Command;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use Ftven\Build\Common\Command\Base\AbstractCommand;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Application;
 use Herrera\Phar\Update\Manifest;
 use Herrera\Phar\Update\Manager;
 
-use Ftven\Build\Common\Application\Base\AbstractApplication;
-
-class UpdateCommand extends Command
+class UpdateCommand extends AbstractCommand
 {
+    /**
+     * @param string $manifestFilePattern
+     */
+    public function __construct($manifestFilePattern)
+    {
+        parent::__construct();
+
+        $this->manifestFilePattern = $manifestFilePattern;
+    }
     /**
      *
      */
@@ -23,24 +33,19 @@ class UpdateCommand extends Command
         ;
     }
     /**
-     * @return string
+     * @return int|void
      */
-    protected function getManifestFile()
+    protected function process()
     {
-        /** @var AbstractApplication $app */
-        $app = $this->getApplication();
+        $managerClass = $this->getParameter('common.services.updateManager.class');
 
-        return sprintf('http://tools.build.indus.ftven.net/%s/manifest.json', $app->getType());
-    }
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int|null|void
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $manager = new Manager(Manifest::loadFile($this->getManifestFile()));
+        /** @var Manager $manager */
+        $manager = new $managerClass(
+            Manifest::loadFile(
+                str_replace('{app}', $this->getApplication()->getType(), $this->manifestFilePattern)
+            )
+        );
+
         $manager->update($this->getApplication()->getVersion(), true);
     }
 }

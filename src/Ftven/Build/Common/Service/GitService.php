@@ -7,6 +7,28 @@ use Ftven\Build\Common\Service\Base\AbstractService;
 class GitService extends AbstractService
 {
     /**
+     * @var SystemService
+     */
+    protected $system;
+    /**
+     * @param SystemService $system
+     *
+     * @return $this
+     */
+    public function setSystem($system)
+    {
+        $this->system = $system;
+
+        return $this;
+    }
+    /**
+     * @return SystemService
+     */
+    public function getSystem()
+    {
+        return $this->system;
+    }
+    /**
      * @param string $key
      *
      * @return string
@@ -15,16 +37,9 @@ class GitService extends AbstractService
      */
     protected function getConfigValue($key)
     {
-        $output = [];
-        $return = 0;
+        list($output) = $this->getSystem()->execute($this->_('git config --global --get %s', $key));
 
-        $value = exec(sprintf('git config --global --get %s', $key), $output, $return);
-
-        if (0 < $return) {
-            throw new \RuntimeException(sprintf("Unable to retrieve Git %s", str_replace('.', ' ', $key)), 60);
-        }
-
-        return trim($value);
+        return trim($output);
     }
     /**
      * @return string
