@@ -12,6 +12,7 @@
 namespace Ftven\Build\Common\Command;
 
 use Ftven\Build\Common\Command\Base\AbstractCommand;
+use Ftven\Build\Common\Service\PhpunitService;
 use Symfony\Component\Console\Input\InputOption;
 use Ftven\Build\Common\Service\BoxService;
 
