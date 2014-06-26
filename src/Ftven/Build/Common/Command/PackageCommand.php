@@ -33,7 +33,7 @@ class PackageCommand extends AbstractCommand
             ->setDescription('Packages the tool to a phar')
             ->addOption(
                 'install', null, InputOption::VALUE_OPTIONAL,
-                "Optionnally install the newly created phar into the system directory", '/usr/local/bin/%name%'
+                "Optionnally install the newly created phar into the system directory", null
             )
         ;
     }
@@ -48,7 +48,13 @@ class PackageCommand extends AbstractCommand
         $install = null;
 
         if (true === $this->hasOption('install')) {
-            $install = str_replace('%name%', $this->getApplication()->getType(), $this->option('install'));
+            $install = '/usr/local/bin/%name%';
+
+            if (null !== $this->option('install')) {
+                $install = $this->option('install');
+            }
+
+            $install = str_replace('%name%', $this->getApplication()->getType(), $install);
         }
 
         /** @var PhpunitService $phpunitService */
