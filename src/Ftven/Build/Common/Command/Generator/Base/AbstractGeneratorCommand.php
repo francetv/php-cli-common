@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Command\Generator\Base;
 
 use Symfony\Component\Console\Output\OutputInterface;
@@ -9,6 +18,11 @@ use PhpAmqpLib\Channel\AMQPChannel;
 
 use Ftven\Build\Common\Command\Base\AbstractAmqpCommand;
 
+/**
+ * Abstract Generator Command that will handle provider features using AMQP.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 abstract class AbstractGeneratorCommand extends AbstractAmqpCommand
 {
     /**

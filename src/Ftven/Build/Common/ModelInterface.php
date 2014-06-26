@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Application;
+namespace Ftven\Build\Common;
 
-use Ftven\Build\Common\Application\Base\AbstractApplication;
+use ArrayAccess;
 
 /**
- * Basic Application, do not use directly, for testing purpose.
+ * Model interface.
  *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-class BasicApplication extends AbstractApplication
+interface ModelInterface extends ArrayAccess
 {
 }

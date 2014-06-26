@@ -1,10 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Service;
 
 use Ftven\Build\Common\Service\Base\AbstractInteractiveService;
 use Symfony\Component\Process\Process;
 
+/**
+ * System Service.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 class SystemService extends AbstractInteractiveService
 {
     /**
@@ -22,15 +36,13 @@ class SystemService extends AbstractInteractiveService
 
         $return = $cmd->run();
 
-        if (null === $goodExitCodes) {
+        if (null === $goodExitCodes || true === in_array($return, $goodExitCodes)) {
             return [$cmd->getOutput(), $cmd->getErrorOutput(), $return, $cmd->getExitCodeText()];
         }
 
-        if (false === in_array($return, $goodExitCodes)) {
-            throw new \RuntimeException(
-                $this->_("Error when executing [%s]: %s", $cmd->getCommandLine(), $cmd->getErrorOutput()),
-                $return
-            );
-        }
+        throw new \RuntimeException(
+            $this->_("Error when executing [%s]: %s", $cmd->getCommandLine(), $cmd->getErrorOutput()),
+            $return
+        );
     }
 }

@@ -1,8 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Model\Base;
 
-abstract class AbstractModel implements \ArrayAccess
+use Ftven\Build\Common\ModelInterface;
+
+/**
+ * Abstract Model.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
+abstract class AbstractModel implements ModelInterface
 {
     /**
      * @param array $data
@@ -95,7 +111,7 @@ abstract class AbstractModel implements \ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return true === method_exists($this, 'get' . ucfirst($offset));
+        return true === method_exists($this, 'get' . ucfirst($offset)) || true === isset($this->$offset);
     }
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>

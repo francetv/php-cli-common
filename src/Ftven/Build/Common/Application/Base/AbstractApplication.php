@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Application\Base;
 
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -9,12 +18,33 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Config\FileLocator;
 
+/**
+ * Abstract Application with short hand methods.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 abstract class AbstractApplication extends Application
 {
     /**
      * @var ContainerBuilder
      */
     protected $container;
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->setContainer(new ContainerBuilder());
+
+        foreach ($this->getConfigLocators() as $location => $files) {
+            $loader = new YamlFileLoader($this->getContainer(), new FileLocator($location));
+            foreach($files as $file) {
+                $loader->load($file);
+            }
+        }
+
+        parent::__construct(sprintf('ftven-%s', $this->getType()), '@package_version@');
+    }
     /**
      * @param ContainerBuilder $container
      *
@@ -39,22 +69,6 @@ abstract class AbstractApplication extends Application
     public function getType()
     {
         return strtolower(preg_replace('/Application$/', '', basename(str_replace('\\', '/', get_class($this)))));
-    }
-    /**
-     *
-     */
-    public function __construct()
-    {
-        $this->setContainer(new ContainerBuilder());
-
-        foreach ($this->getConfigLocators() as $location => $files) {
-            $loader = new YamlFileLoader($this->getContainer(), new FileLocator($location));
-            foreach($files as $file) {
-                $loader->load($file);
-            }
-        }
-
-        parent::__construct(sprintf('ftven-%s', $this->getType()), '@package_version@');
     }
     /**
      * @return array

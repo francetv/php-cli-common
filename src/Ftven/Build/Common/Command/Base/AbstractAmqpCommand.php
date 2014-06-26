@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Command\Base;
 
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,6 +19,11 @@ use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
+/**
+ * Abstract AMQP Command that will handle provider/consumer features using AMQP.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 abstract class AbstractAmqpCommand extends AbstractCommand
 {
     /**
@@ -25,8 +39,13 @@ abstract class AbstractAmqpCommand extends AbstractCommand
             ->addOption('amqp-user', 'u', InputOption::VALUE_REQUIRED, "User of the AMQP server", 'guest')
             ->addOption('amqp-pass', 'pw', InputOption::VALUE_REQUIRED, "Password of the AMQP server", 'guest')
             ->addOption('amqp-vhost', 'vh', InputOption::VALUE_REQUIRED, "Password of the AMQP server", '/')
-            ->addOption('amqp-noop', 'x', InputOption::VALUE_NONE, "Enables the message simulator/mock mode (do nothing, black hole)")
-            ->addOption('amqp-dump', 'd', InputOption::VALUE_NONE, "Do not send the queue messages, dump them to the console")
+            ->addOption(
+                'amqp-noop', 'x', InputOption::VALUE_NONE,
+                "Enables the message simulator/mock mode (do nothing, black hole)"
+            )
+            ->addOption(
+                'amqp-dump', 'd', InputOption::VALUE_NONE, "Do not send the queue messages, dump them to the console"
+            )
         ;
     }
     /**
@@ -67,7 +86,12 @@ abstract class AbstractAmqpCommand extends AbstractCommand
         );
 
         if (true === isset($options['exchange'])) {
-            $this->bindQueueToExchange($channel, $name, $options['exchange'], isset($options['routing_key']) ? $options['routing_key'] : null);
+            $this->bindQueueToExchange(
+                $channel,
+                $name,
+                $options['exchange'],
+                isset($options['routing_key']) ? $options['routing_key'] : null
+            );
         }
 
         if (true === isset($options['consumer'])) {
@@ -199,14 +223,16 @@ abstract class AbstractAmqpCommand extends AbstractCommand
     {
         $that = $this;
 
-        $channel->basic_consume($queue, $tag, false, false, false, false, function ($msg) use ($channel, $callback, $that) {
-            $data = json_decode($msg->body, true);
-            $messagesToSend = call_user_func($callback, $data);
-            $that->sendMessages($channel, $messagesToSend);
-            /** @var AMQPChannel $_channel */
-            $_channel = $msg->delivery_info['channel'];
-            $_channel->basic_ack($msg->delivery_info['delivery_tag']);
-        });
+        $channel->basic_consume(
+            $queue, $tag, false, false, false, false, function ($msg) use ($channel, $callback, $that) {
+                $data = json_decode($msg->body, true);
+                $messagesToSend = call_user_func($callback, $data);
+                $that->sendMessages($channel, $messagesToSend);
+                /** @var AMQPChannel $_channel */
+                $_channel = $msg->delivery_info['channel'];
+                $_channel->basic_ack($msg->delivery_info['delivery_tag']);
+            }
+        );
 
         return $this;
     }

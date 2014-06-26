@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Command\Base;
 
 use Symfony\Component\Console\Question\ConfirmationQuestion;
@@ -12,6 +21,11 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Command\Command;
 
+/**
+ * Abstract Command with short hand methods.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 abstract class AbstractCommand extends Command
 {
     /**
@@ -142,12 +156,18 @@ abstract class AbstractCommand extends Command
      *
      * @return string
      */
-    protected function choice(InputInterface $input, OutputInterface $output, $message, $expectedValues, $default = null)
+    protected function choice(
+        InputInterface $input, OutputInterface $output, $message, $expectedValues, $default = null
+    )
     {
         /** @var QuestionHelper $q */
         $q = $this->getHelperSet()->get('question');
 
-        $question = new ChoiceQuestion($message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ', $expectedValues, $default);
+        $question = new ChoiceQuestion(
+            $message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ',
+            $expectedValues,
+            $default
+        );
 
         $question->setMaxAttempts(5);
 

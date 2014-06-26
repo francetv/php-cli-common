@@ -9,15 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Application;
+namespace Ftven\Build\Common\Model;
 
-use Ftven\Build\Common\Application\Base\AbstractApplication;
+use Ftven\Build\Common\Model\Base\AbstractModel;
 
 /**
- * Basic Application, do not use directly, for testing purpose.
+ * Basic Model, do not use directly, for testing purpose.
  *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-class BasicApplication extends AbstractApplication
+class BasicModel extends AbstractModel
 {
+    /**
+     * @return $this
+     */
+    public function initTime()
+    {
+        $this->time = date('c', microtime(true));
+
+        return $this;
+    }
 }
