@@ -75,8 +75,12 @@ abstract class AbstractApplication extends Application
      */
     protected function getConfigLocators()
     {
+        $rClass = new \ReflectionClass($this);
+
         return [
-            __DIR__ . '/../Resources' => ['services.yml'],
+            __DIR__ . '/../Resources'       => ['services.yml'],
+            dirname($rClass->getFileName()) => ['services.yml'],
+
         ];
     }
     /**
@@ -84,7 +88,16 @@ abstract class AbstractApplication extends Application
      */
     protected function registerCommands()
     {
-        return [];
+        $commands = [];
+
+        foreach($this->getContainer()->getDefinitions() as $id => $definition) {
+            if (0 >= preg_match('/^' . $this->getType() . '\.commands\./', $id)) {
+                continue;
+            }
+            $commands[] = $this->getContainer()->get($id);
+        }
+
+        return $commands;
     }
     /**
      * @return Command[]
