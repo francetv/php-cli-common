@@ -49,6 +49,13 @@ class PackageCommand extends AbstractCommand
             $install = str_replace('%name%', $this->getApplication()->getType(), $this->option('install'));
         }
 
+        /** @var PhpunitService $phpunitService */
+        $phpunitService = $this->get('common.services.phpunit');
+
+        if (true === $phpunitService->hasSupport()) {
+            $phpunitService->test();
+        }
+
         /** @var BoxService $boxService */
         $boxService = $this->get('common.services.box');
 
