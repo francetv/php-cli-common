@@ -13,6 +13,7 @@ parameters:
   common.services.box.class:           Ftven\Build\Common\Service\BoxService
   common.services.system.class:        Ftven\Build\Common\Service\SystemService
   common.services.git.class:           Ftven\Build\Common\Service\GitService
+  common.services.phpunit.class:       Ftven\Build\Common\Service\PhpunitService
 
 
 services:
@@ -30,6 +31,10 @@ services:
     class: %common.services.system.class%
   common.services.git:
     class: %common.services.git.class%
+    calls:
+      - [setSystem, [@common.services.system]]
+  common.services.phpunit:
+    class: %common.services.phpunit.class%
     calls:
       - [setSystem, [@common.services.system]]
   common.services.box:
