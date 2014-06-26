@@ -64,7 +64,7 @@ class PackageCommand extends AbstractCommand
                 return 1;
             }
             $duration = microtime(true) - $start;
-            $this->out("\r                            \r<info>OK</info> PHPUnit tests successfully executed in %.1ds", $duration);
+            $this->outln("\r                            \r<info>OK</info> PHPUnit tests successfully executed in %.1ds", $duration);
         }
 
         $this->out("Packaging the tool using Box...");
@@ -79,7 +79,7 @@ class PackageCommand extends AbstractCommand
             return 2;
         }
         $duration = microtime(true) - $start;
-        $this->out(
+        $this->outln(
             "\r                                      \r<info>OK</info> Box package successfully created in %.1ds%s", $duration, $install ? " in $install" : ''
         );
 
