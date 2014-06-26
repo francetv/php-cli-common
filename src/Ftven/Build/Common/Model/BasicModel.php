@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service\Base;
+namespace Ftven\Build\Common\Model;
 
-use Ftven\Build\Common\ServiceInterface;
+use Ftven\Build\Common\Model\Base\AbstractModel;
 
 /**
- * Abstract Service.
+ * Basic Model, do not use directly, for testing purpose.
  *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-abstract class AbstractService implements ServiceInterface
+class BasicModel extends AbstractModel
 {
     /**
-     * @param string $msg
-     *
-     * @return string
+     * @return $this
      */
-    protected function _($msg)
+    public function initTime()
     {
-        return call_user_func_array('sprintf', func_get_args());
+        $this->time = date('c', microtime(true));
+
+        return $this;
     }
 }

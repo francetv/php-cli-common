@@ -1,15 +1,68 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Application\Base;
 
-use Ftven\Build\Common\Command\PackageCommand;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Config\FileLocator;
 
-use Ftven\Build\Common\Command\UpdateCommand;
-
+/**
+ * Abstract Application with short hand methods.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 abstract class AbstractApplication extends Application
 {
+    /**
+     * @var ContainerBuilder
+     */
+    protected $container;
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->setContainer(new ContainerBuilder());
+
+        foreach ($this->getConfigLocators() as $location => $files) {
+            $loader = new YamlFileLoader($this->getContainer(), new FileLocator($location));
+            foreach($files as $file) {
+                $loader->load($file);
+            }
+        }
+
+        parent::__construct(sprintf('ftven-%s', $this->getType()), '@package_version@');
+    }
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return $this
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+
+        return $this;
+    }
+    /**
+     * @return ContainerBuilder
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
     /**
      * @return string
      */
@@ -18,11 +71,13 @@ abstract class AbstractApplication extends Application
         return strtolower(preg_replace('/Application$/', '', basename(str_replace('\\', '/', get_class($this)))));
     }
     /**
-     *
+     * @return array
      */
-    public function __construct()
+    protected function getConfigLocators()
     {
-        parent::__construct(sprintf('ftven-%s', $this->getType()), '@package_version@');
+        return [
+            __DIR__ . '/../Resources' => ['services.yml'],
+        ];
     }
     /**
      * @return Command[]
@@ -37,17 +92,27 @@ abstract class AbstractApplication extends Application
     protected function registerCommonCommands()
     {
         $commands = [
-            new UpdateCommand(),
+            $this->getContainer()->get('common.commands.update'),
         ];
 
-        if (is_file(getcwd() . '/box.json') && is_file(getcwd() . '/bin/box')) {
-            $commands[] = new PackageCommand();
+        if (true === $this->hasBoxSupport()) {
+            $commands[] = $this->getContainer()->get('common.commands.package');
         }
 
         return $commands;
     }
     /**
-     * @return array|Command[]
+     * @return bool
+     */
+    protected function hasBoxSupport()
+    {
+        /** @var Filesystem $fs */
+        $fs = $this->getContainer()->get('common.services.filesystem');
+
+        return $fs->exists('box.json') && $fs->exists('bin/box');
+    }
+    /**
+     * @return Command[]
      */
     protected function getDefaultCommands()
     {

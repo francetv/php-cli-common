@@ -1,13 +1,25 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Command;
 
-use Ftven\Build\Common\Application\Base\AbstractApplication;
 use Ftven\Build\Common\Command\Base\AbstractCommand;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputInterface;
+use Ftven\Build\Common\Service\BoxService;
 
+/**
+ * Package command.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 class PackageCommand extends AbstractCommand
 {
     /**
@@ -18,61 +30,28 @@ class PackageCommand extends AbstractCommand
         $this
             ->setName('package')
             ->setDescription('Packages the tool to a phar')
-            ->addOption('install', null, InputOption::VALUE_OPTIONAL, "Optionnally install the newly created phar into the system directory", '/usr/local/bin/%name%')
+            ->addOption(
+                'install', null, InputOption::VALUE_OPTIONAL,
+                "Optionnally install the newly created phar into the system directory", '/usr/local/bin/%name%'
+            )
         ;
     }
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @return int|void
      *
-     * @return int|null|void
-     *
-     * @throws \Exception
+     * @throws \RuntimeException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function process()
     {
         $install = null;
 
-        /** @var AbstractApplication $app */
-        $app = $this->getApplication();
-
-        if (true === $input->hasOption('install')) {
-            $install = $input->getOption('install');
-            $install = str_replace('%name%', $app->getType(), $install);
+        if (true === $this->hasOption('install')) {
+            $install = str_replace('%name%', $this->getApplication()->getType(), $this->option('install'));
         }
 
-        $return = 0;
+        /** @var BoxService $boxService */
+        $boxService = $this->get('common.services.box');
 
-        passthru('./bin/box build', $return);
-
-        if (0 !== $return) {
-            throw new \RuntimeException("An error occured when packaging the tool", 2);
-        }
-
-        if (null !== $install) {
-            if (true === is_file('./box.json')) {
-                $box = @json_decode(file_get_contents('./box.json'), true);
-                if (true === is_array($box) && true === isset($box['output'])) {
-                    $file = $box['output'];
-                } else {
-                    $file = 'ftven-' . $app->getType();
-                }
-            } else {
-                $file = 'ftven-' . $app->getType();
-            }
-            if (true === is_file($install)) {
-                if (false === $this->confirm($input, $output, sprintf("File '%s' already exist, do you want to replace it with new version", $install), true)) {
-                    return;
-                }
-            }
-
-            $return = 0;
-
-            passthru(sprintf('sudo cp %s %s', $file, $install), $return);
-
-            if (0 < $return) {
-                throw new \RuntimeException(sprintf("An error occured when installing the file '%s' to '%s'", $file, $install), 67);
-            }
-        }
+        $boxService->build(null, $install);
     }
 }

@@ -1,16 +1,31 @@
 <?php
 
+/*
+ * This file is part of the Cli-common package.
+ *
+ * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ftven\Build\Common\Command\Base;
 
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Ftven\Build\Common\Application\Base\AbstractApplication;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Command\Command;
 
+/**
+ * Abstract Command with short hand methods.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
 abstract class AbstractCommand extends Command
 {
     /**
@@ -120,7 +135,7 @@ abstract class AbstractCommand extends Command
             $len = function_exists('mb_strlen') ? mb_strlen($answer) : strlen($answer);
 
             if (0 === $len) {
-                throw new \RuntimeException("Vous devez saisir une valeur", 23);
+                throw new \RuntimeException("You must enter a value", 23);
             }
 
             return $answer;
@@ -141,12 +156,18 @@ abstract class AbstractCommand extends Command
      *
      * @return string
      */
-    protected function choice(InputInterface $input, OutputInterface $output, $message, $expectedValues, $default = null)
+    protected function choice(
+        InputInterface $input, OutputInterface $output, $message, $expectedValues, $default = null
+    )
     {
         /** @var QuestionHelper $q */
         $q = $this->getHelperSet()->get('question');
 
-        $question = new ChoiceQuestion($message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ', $expectedValues, $default);
+        $question = new ChoiceQuestion(
+            $message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ',
+            $expectedValues,
+            $default
+        );
 
         $question->setMaxAttempts(5);
 
@@ -167,7 +188,9 @@ abstract class AbstractCommand extends Command
         /** @var QuestionHelper $q */
         $q = $this->getHelperSet()->get('question');
 
-        $question = new ConfirmationQuestion($message . ($default ? (sprintf(' [%s]', $default ? 'yes' : 'no')) : '') . ' : ', true === $default);
+        $question = new ConfirmationQuestion(
+            $message . ($default ? (sprintf(' [%s]', $default ? 'yes' : 'no')) : '') . ' : ', true === $default
+        );
 
         $question->setMaxAttempts(3);
 
@@ -359,5 +382,35 @@ abstract class AbstractCommand extends Command
         $this->getOutput()->writeln(call_user_func_array([$this, '_'], func_get_args()));
 
         return $this;
+    }
+    /**
+     * @return AbstractApplication
+     */
+    public function getApplication()
+    {
+        return parent::getApplication();
+    }
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    protected function get($key)
+    {
+        return $this->getApplication()->getContainer()->get($key);
+    }
+    /**
+     * @param string $name
+     * @param mixed  $defaultValue
+     *
+     * @return mixed|null
+     */
+    protected function getParameter($name, $defaultValue = null)
+    {
+        if (false === $this->getApplication()->getContainer()->hasParameter($name)) {
+            return $defaultValue;
+        }
+
+        return $this->getApplication()->getContainer()->getParameter($name);
     }
 }

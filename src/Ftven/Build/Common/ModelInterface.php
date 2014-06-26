@@ -11,11 +11,13 @@
 
 namespace Ftven\Build\Common;
 
+use ArrayAccess;
+
 /**
- * Service interface.
+ * Model interface.
  *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-interface ServiceInterface
+interface ModelInterface extends ArrayAccess
 {
 }

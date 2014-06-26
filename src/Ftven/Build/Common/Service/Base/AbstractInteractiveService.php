@@ -2,11 +2,15 @@
 
 namespace Ftven\Build\Common\Service\Base;
 
-use Ftven\Build\Common\ServiceInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class AbstractService implements ServiceInterface
+/**
+ * Abstract Interactive Service.
+ *
+ * @author Olivier Hoareau olivier@phppro.fr>
+ */
+abstract class AbstractInteractiveService extends AbstractService
 {
     /**
      * @var OutputInterface

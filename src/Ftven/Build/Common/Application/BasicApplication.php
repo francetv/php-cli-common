@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common;
+namespace Ftven\Build\Common\Application;
+
+use Ftven\Build\Common\Application\Base\AbstractApplication;
 
 /**
- * Service interface.
+ * Basic Application, do not use directly, for testing purpose.
  *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-interface ServiceInterface
+class BasicApplication extends AbstractApplication
 {
 }

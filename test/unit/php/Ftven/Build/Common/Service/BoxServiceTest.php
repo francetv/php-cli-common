@@ -9,24 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service\Base;
-
-use Ftven\Build\Common\ServiceInterface;
+namespace Ftven\Build\Common\Service;
 
 /**
- * Abstract Service.
- *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-abstract class AbstractService implements ServiceInterface
+class BoxServiceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @param string $msg
-     *
-     * @return string
-     */
-    protected function _($msg)
+    public function testConstruct()
     {
-        return call_user_func_array('sprintf', func_get_args());
+        $s = new BoxService();
+
+        $this->assertEquals('Ftven\\Build\\Common\\Service\\BoxService', get_class($s));
     }
 }

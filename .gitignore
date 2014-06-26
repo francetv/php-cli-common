@@ -19,3 +19,7 @@
 /bin/box
 /bin/jsonlint
 /bin/validate-json
+
+### QA
+
+/reports/
