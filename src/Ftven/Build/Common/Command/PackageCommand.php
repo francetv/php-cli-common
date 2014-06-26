@@ -12,6 +12,7 @@
 namespace Ftven\Build\Common\Command;
 
 use Ftven\Build\Common\Command\Base\AbstractCommand;
+use Ftven\Build\Common\Service\PhpunitService;
 use Symfony\Component\Console\Input\InputOption;
 use Ftven\Build\Common\Service\BoxService;
 
@@ -40,6 +41,7 @@ class PackageCommand extends AbstractCommand
      * @return int|void
      *
      * @throws \RuntimeException
+     * @throws \Exception
      */
     protected function process()
     {
@@ -53,12 +55,32 @@ class PackageCommand extends AbstractCommand
         $phpunitService = $this->get('common.services.phpunit');
 
         if (true === $phpunitService->hasSupport()) {
-            $phpunitService->test();
+            $this->out("Executing PHPUnit tests...");
+            $start = microtime(true);
+            try {
+                $phpunitService->test();
+            } catch (\Exception $e) {
+                $this->outln("\r                            \rFAIL PHPUnit tests errors");
+                throw $e;
+            }
+            $duration = microtime(true) - $start;
+            $this->out("<info>OK</info> PHPUnit tests successfully executed in %.1ds", $duration);
         }
 
-        /** @var BoxService $boxService */
-        $boxService = $this->get('common.services.box');
+        $this->out("Packaging the tool using Box...");
+        $start = microtime(true);
+        try {
+            /** @var BoxService $boxService */
+            $boxService = $this->get('common.services.box');
 
-        $boxService->build(null, $install);
+            $boxService->build(null, $install);
+        } catch (\Exception $e) {
+            $this->outln("\r                                 \rFAIL Box packaging errors");
+            throw $e;
+        }
+        $duration = microtime(true) - $start;
+        $this->out(
+            "<info>OK</info> Box package successfully created in %.1ds%s", $duration, $install ? " in $install" : ''
+        );
     }
 }

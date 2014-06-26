@@ -50,7 +50,7 @@ class PhpunitService extends AbstractService
     public function hasSupport($dir = null)
     {
         try {
-            list ($output) = $this->getSystem()->execute('bin/phpunit -v', $dir);
+            list ($output) = $this->getSystem()->execute('bin/phpunit --version', $dir);
 
             if (0 < preg_match('/^PHPUnit\s+[0-9]+\.[0-9]+\.[0-9]+/', $output)) {
                 return true;
