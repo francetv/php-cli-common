@@ -78,8 +78,8 @@ abstract class AbstractApplication extends Application
         $rClass = new \ReflectionClass($this);
 
         return [
-            __DIR__ . '/../Resources'       => ['services.yml'],
-            dirname($rClass->getFileName()) => ['services.yml'],
+            __DIR__ . '/../Resources'                      => ['services.yml'],
+            dirname($rClass->getFileName()) . '/Resources' => ['services.yml'],
 
         ];
     }
