@@ -60,8 +60,8 @@ class PackageCommand extends AbstractCommand
             try {
                 $phpunitService->test();
             } catch (\Exception $e) {
-                $this->outln("\r                            \rFAIL PHPUnit tests errors");
-                throw $e;
+                $this->outln("\r                            \r<error>FAIL</error> PHPUnit tests errors");
+                return 1;
             }
             $duration = microtime(true) - $start;
             $this->out("<info>OK</info> PHPUnit tests successfully executed in %.1ds", $duration);
@@ -75,12 +75,14 @@ class PackageCommand extends AbstractCommand
 
             $boxService->build(null, $install);
         } catch (\Exception $e) {
-            $this->outln("\r                                 \rFAIL Box packaging errors");
-            throw $e;
+            $this->outln("\r                                 \r<error>FAIL</error> Box packaging errors");
+            return 2;
         }
         $duration = microtime(true) - $start;
         $this->out(
             "<info>OK</info> Box package successfully created in %.1ds%s", $duration, $install ? " in $install" : ''
         );
+
+        return 0;
     }
 }
