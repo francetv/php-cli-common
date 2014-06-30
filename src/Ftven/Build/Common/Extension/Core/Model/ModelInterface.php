@@ -9,23 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Feature;
+namespace Ftven\Build\Common\Extension\Core\Model;
 
-use Symfony\Component\Process\Process;
+use ArrayAccess;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-trait ProcessRunnerTrait
+interface ModelInterface extends ArrayAccess
 {
     /**
-     * @param string      $command
-     * @param null|string $workingDirectory
-     *
-     * @return Process
+     * @param array $data
      */
-    protected function createProcess($command, $workingDirectory = null)
-    {
-        return new Process($command, $workingDirectory);
-    }
+    public function __construct($data = []);
+    /**
+     * @return array
+     */
+    public function toArray();
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function getKey($key);
 }

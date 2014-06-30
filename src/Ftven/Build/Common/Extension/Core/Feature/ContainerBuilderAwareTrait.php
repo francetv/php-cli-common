@@ -11,33 +11,33 @@
 
 namespace Ftven\Build\Common\Extension\Core\Feature;
 
-use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-trait SymfonyFilesystemAwareTrait
+trait ContainerBuilderAwareTrait
 {
     /**
-     * @var Filesystem
+     * @var ContainerBuilder
      */
-    protected $filesystem;
+    protected $containerBuilder;
     /**
-     * @param Filesystem $filesystem
+     * @param ContainerBuilder $containerBuilder
      *
      * @return $this
      */
-    public function setFilesystem(Filesystem $filesystem)
+    public function setContainerBuilder($containerBuilder)
     {
-        $this->filesystem = $filesystem;
+        $this->containerBuilder = $containerBuilder;
 
         return $this;
     }
     /**
-     * @return Filesystem
+     * @return ContainerBuilder
      */
-    public function getFilesystem()
+    public function getContainerBuilder()
     {
-        return $this->filesystem;
+        return $this->containerBuilder;
     }
 }

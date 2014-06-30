@@ -11,21 +11,25 @@
 
 namespace Ftven\Build\Common\Extension\Core\Feature;
 
-use Symfony\Component\Process\Process;
-
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-trait ProcessRunnerTrait
+trait EnvironmentAwareTrait
 {
     /**
-     * @param string      $command
-     * @param null|string $workingDirectory
+     * @param string $name
+     * @param mixed  $defaultValue
      *
-     * @return Process
+     * @return null|string
      */
-    protected function createProcess($command, $workingDirectory = null)
+    protected function env($name, $defaultValue = null)
     {
-        return new Process($command, $workingDirectory);
+        $value = getenv($name);
+
+        if (null === $value || false === $value) {
+            return $defaultValue;
+        }
+
+        return $value;
     }
 }

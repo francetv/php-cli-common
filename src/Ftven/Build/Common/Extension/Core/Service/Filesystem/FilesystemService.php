@@ -16,7 +16,7 @@ use Ftven\Build\Common\Extension\Core\Feature\ExceptionThrowerTrait;
 use RuntimeException;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class FilesystemService implements FilesystemServiceInterface
 {
@@ -65,5 +65,14 @@ class FilesystemService implements FilesystemServiceInterface
         $this->getFilesystem()->dumpFile($path, $content, $mode);
 
         return $this;
+    }
+    /**
+     * @param array|string|\Traversable $files
+     *
+     * @return bool
+     */
+    public function exists($files)
+    {
+        return $this->getFilesystem()->exists($files);
     }
 }

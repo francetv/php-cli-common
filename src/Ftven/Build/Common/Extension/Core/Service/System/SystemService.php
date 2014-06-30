@@ -15,7 +15,7 @@ use Ftven\Build\Common\Extension\Core\Feature\ExceptionThrowerTrait;
 use Ftven\Build\Common\Extension\Core\Feature\ProcessRunnerTrait;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class SystemService implements SystemServiceInterface
 {

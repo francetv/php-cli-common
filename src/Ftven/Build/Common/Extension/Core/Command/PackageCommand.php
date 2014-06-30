@@ -12,10 +12,10 @@
 namespace Ftven\Build\Common\Extension\Core\Command;
 
 use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\BoxServiceAwareTrait;
-use Ftven\Build\Common\Command\Base\AbstractCommand;
+use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class PackageCommand extends AbstractCommand
 {
@@ -47,7 +47,7 @@ class PackageCommand extends AbstractCommand
         $copyTo = null;
 
         if (null !== $this->option('install')) {
-            $copyTo = $this->_('/usr/local/bin/%name%', $this->getApplication()->getType());
+            $copyTo = $this->_('/usr/local/bin/%name%', $this->getApplication()->getName());
             if (true === is_string($this->option('install'))) {
                 $copyTo = $this->option('install');
             }

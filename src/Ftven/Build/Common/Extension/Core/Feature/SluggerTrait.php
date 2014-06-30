@@ -9,24 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service\Base;
-
-use Ftven\Build\Common\ServiceInterface;
+namespace Ftven\Build\Common\Extension\Core\Feature;
 
 /**
- * Abstract Service.
- *
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
-abstract class AbstractService implements ServiceInterface
+trait SluggerTrait
 {
     /**
-     * @param string $msg
+     * @param string $text
+     * @param string $separator
      *
      * @return string
      */
-    protected function _($msg)
+    protected function slug($text, $separator = '-')
     {
-        return call_user_func_array('sprintf', func_get_args());
+        return preg_replace('/[^a-z0-9_\-\.]+/', $separator, strtolower($text));
     }
 }

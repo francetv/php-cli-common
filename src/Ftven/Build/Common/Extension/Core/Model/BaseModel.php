@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Model\Base;
-
-use Ftven\Build\Common\ModelInterface;
+namespace Ftven\Build\Common\Extension\Core\Model;
 
 /**
- * Abstract Model.
- *
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
-abstract class AbstractModel implements ModelInterface
+class BaseModel implements ModelInterface
 {
+    /**
+     * @var string
+     */
+    protected $time;
     /**
      * @param array $data
      */
@@ -251,5 +251,14 @@ abstract class AbstractModel implements ModelInterface
         }
 
         return $value;
+    }
+    /**
+     * @return $this
+     */
+    public function initTime()
+    {
+        $this->time = date('c', microtime(true));
+
+        return $this;
     }
 }

@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Extension\Core\Service\System;
 use RuntimeException;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 interface SystemServiceInterface
 {

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Command;
+namespace Ftven\Build\Common\Extension\Core\Command;
 
 use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\UpdateManagerServiceAwareTrait;
-use Ftven\Build\Common\Command\Base\AbstractCommand;
+use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class UpdateCommand extends AbstractCommand
 {
@@ -50,7 +50,7 @@ class UpdateCommand extends AbstractCommand
     {
         $this->getUpdateManagerService()->update(
             $this->getApplication()->getVersion(),
-            str_replace('{app}', $this->getApplication()->getType(), $this->manifestFilePattern)
+            str_replace('{name}', $this->getApplication()->getName(), $this->manifestFilePattern)
         );
     }
 }

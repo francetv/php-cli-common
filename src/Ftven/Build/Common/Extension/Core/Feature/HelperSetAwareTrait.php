@@ -11,21 +11,33 @@
 
 namespace Ftven\Build\Common\Extension\Core\Feature;
 
-use Symfony\Component\Process\Process;
+use Symfony\Component\Console\Helper\HelperSet;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-trait ProcessRunnerTrait
+trait HelperSetAwareTrait
 {
     /**
-     * @param string      $command
-     * @param null|string $workingDirectory
-     *
-     * @return Process
+     * @var HelperSet
      */
-    protected function createProcess($command, $workingDirectory = null)
+    protected $helperSet;
+    /**
+     * @param HelperSet $helperSet
+     *
+     * @return $this
+     */
+    public function setHelperSet($helperSet)
     {
-        return new Process($command, $workingDirectory);
+        $this->helperSet = $helperSet;
+
+        return $this;
+    }
+    /**
+     * @return HelperSet
+     */
+    public function getHelperSet()
+    {
+        return $this->helperSet;
     }
 }

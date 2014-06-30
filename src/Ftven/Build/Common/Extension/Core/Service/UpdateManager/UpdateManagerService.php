@@ -16,7 +16,7 @@ use Herrera\Phar\Update\Manifest;
 use Herrera\Phar\Update\Manager;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class UpdateManagerService implements UpdateManagerServiceInterface
 {

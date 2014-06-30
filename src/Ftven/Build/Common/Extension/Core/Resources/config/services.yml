@@ -1,17 +1,17 @@
 parameters:
 
   # ...
-  update.manifest.location: "http://tools.build.indus.ftven.net/{app}/manifest.json"
+  update.manifest.location: "http://mycompany.com/{name}/manifest.json"
 
   # commands
-  common.commands.update.class:  Ftven\Build\Common\Command\UpdateCommand
-  common.commands.package.class: Ftven\Build\Common\Command\PackageCommand
+  common.commands.update.class:  Ftven\Build\Common\Extension\Core\Command\UpdateCommand
+  common.commands.package.class: Ftven\Build\Common\Extension\Core\Command\PackageCommand
 
   # services
-  symfony.filesystem.filesystem.class:    Symfony\Component\Filesystem\Filesystem
+  symfony.filesystem.filesystem.class: Symfony\Component\Filesystem\Filesystem
   common.services.updateManager.class: Herrera\Phar\Update\Manager
 
-  common.services.filesystem.class:    Ftven\Build\Common\Extension\Core\Service\Filesystem\Filesystem
+  common.services.filesystem.class:    Ftven\Build\Common\Extension\Core\Service\Filesystem\FilesystemService
   common.services.box.class:           Ftven\Build\Common\Extension\Core\Service\Box\BoxService
   common.services.system.class:        Ftven\Build\Common\Extension\Core\Service\System\SystemService
   common.services.phpunit.class:       Ftven\Build\Common\Extension\Core\Service\Phpunit\PhpunitService

@@ -11,21 +11,63 @@
 
 namespace Ftven\Build\Common\Extension\Core;
 
-use Ftven\Build\Common\Extension\Core\Feature\AbstractApplicationAwareTrait;
-use Symfony\Component\Console\Command\Command;
-use Ftven\Build\Common\ExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Config\FileLocator;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class CoreExtension implements ExtensionInterface
+class CoreExtension extends Extension
 {
-    use AbstractApplicationAwareTrait;
     /**
-     * @return Command[]
+     * Loads a specific configuration.
+     *
+     * @param array $config An array of configuration values
+     * @param ContainerBuilder $container A ContainerBuilder instance
+     *
+     * @throws \InvalidArgumentException When provided tag is not defined in this extension
+     *
+     * @api
      */
-    public function getDefaultCommands()
+    public function load(array $config, ContainerBuilder $container)
     {
-        return [];
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/Resources/config'));
+        $loader->load('services.yml');
+
+        /** @var Application $application */
+        $application = $container->get('application');
+
+        $commands = [
+            $container->get('common.commands.update'),
+        ];
+
+        if (true === $this->hasBoxSupport($container)) {
+            $commands[] = $container->get('common.commands.package');
+        }
+
+        foreach($container->getDefinitions() as $id => $definition) {
+            if (0 >= preg_match('/\.commands\./', $id)) {
+                continue;
+            }
+            $commands[] = $container->get($id);
+        }
+
+        $application->addCommands($commands);
+    }
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return bool
+     */
+    protected function hasBoxSupport(ContainerBuilder $container)
+    {
+        /** @var Filesystem $fs */
+        $fs = $container->get('common.services.filesystem');
+
+        return $fs->exists('box.json') && $fs->exists('bin/box');
     }
 }

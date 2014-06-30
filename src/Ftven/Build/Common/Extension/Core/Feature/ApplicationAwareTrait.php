@@ -11,33 +11,33 @@
 
 namespace Ftven\Build\Common\Extension\Core\Feature;
 
-use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Console\Application;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-trait SymfonyFilesystemAwareTrait
+trait ApplicationAwareTrait
 {
     /**
-     * @var Filesystem
+     * @var Application
      */
-    protected $filesystem;
+    protected $application;
     /**
-     * @param Filesystem $filesystem
+     * @param Application $application
      *
      * @return $this
      */
-    public function setFilesystem(Filesystem $filesystem)
+    public function setApplication($application)
     {
-        $this->filesystem = $filesystem;
+        $this->application = $application;
 
         return $this;
     }
     /**
-     * @return Filesystem
+     * @return Application
      */
-    public function getFilesystem()
+    public function getApplication()
     {
-        return $this->filesystem;
+        return $this->application;
     }
 }
