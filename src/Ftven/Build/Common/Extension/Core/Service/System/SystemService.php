@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service;
+namespace Ftven\Build\Common\Extension\Core\Service\System;
 
-use Ftven\Build\Common\Service\Base\AbstractInteractiveService;
-use Symfony\Component\Process\Process;
+use Ftven\Build\Common\Extension\Core\Feature\ExceptionThrowerTrait;
+use Ftven\Build\Common\Extension\Core\Feature\ProcessRunnerTrait;
 
 /**
- * System Service.
- *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-class SystemService extends AbstractInteractiveService
+class SystemService implements SystemServiceInterface
 {
+    use ProcessRunnerTrait;
+    use ExceptionThrowerTrait;
     /**
      * @param string $command
      * @param string $dir
@@ -32,7 +32,7 @@ class SystemService extends AbstractInteractiveService
      */
     public function execute($command, $dir = null, $goodExitCodes = [0])
     {
-        $cmd = new Process($command, $dir);
+        $cmd = $this->createProcess($command, $dir);
 
         $return = $cmd->run();
 
@@ -40,9 +40,8 @@ class SystemService extends AbstractInteractiveService
             return [$cmd->getOutput(), $cmd->getErrorOutput(), $return, $cmd->getExitCodeText()];
         }
 
-        throw new \RuntimeException(
-            $this->_("Error when executing [%s]: %s", $cmd->getCommandLine(), $cmd->getErrorOutput()),
-            $return
+        return $this->throwException(
+            $return, "Error when executing [%s]: %s", $cmd->getCommandLine(), $cmd->getErrorOutput()
         );
     }
 }

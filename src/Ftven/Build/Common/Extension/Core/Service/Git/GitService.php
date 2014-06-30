@@ -9,39 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service;
+namespace Ftven\Build\Common\Extension\Core\Service\Git;
 
-use Ftven\Build\Common\Service\Base\AbstractService;
+use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\SystemServiceAwareTrait;
+use Ftven\Build\Common\Extension\Core\Feature\StringFormatterTrait;
 
 /**
- * Git Service.
- *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-class GitService extends AbstractService
+class GitService implements GitServiceInterface
 {
-    /**
-     * @var SystemService
-     */
-    protected $system;
-    /**
-     * @param SystemService $system
-     *
-     * @return $this
-     */
-    public function setSystem($system)
-    {
-        $this->system = $system;
-
-        return $this;
-    }
-    /**
-     * @return SystemService
-     */
-    public function getSystem()
-    {
-        return $this->system;
-    }
+    use StringFormatterTrait;
+    use SystemServiceAwareTrait;
     /**
      * @param string $key
      *
@@ -51,7 +30,7 @@ class GitService extends AbstractService
      */
     protected function getConfigValue($key)
     {
-        list($output) = $this->getSystem()->execute($this->_('git config --global --get %s', $key));
+        list($output) = $this->getSystemService()->execute($this->_('git config --global --get %s', $key));
 
         return trim($output);
     }
