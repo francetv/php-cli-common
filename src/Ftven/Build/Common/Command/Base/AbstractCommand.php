@@ -11,6 +11,8 @@
 
 namespace Ftven\Build\Common\Command\Base;
 
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Ftven\Build\Common\Application\Base\AbstractApplication;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -413,4 +415,59 @@ abstract class AbstractCommand extends Command
 
         return $this->getApplication()->getContainer()->getParameter($name);
     }
+    protected function describe()
+    {
+        return [];
+    }
+    /**
+     *
+     */
+    protected function configure()
+    {
+        parent::configure();
+
+        $infos = $this->describe();
+
+        if (true === isset($infos['name'])) $this->setName($infos['name']);
+        if (true === isset($infos['description'])) $this->setDescription($infos['description']);
+
+        if (true === isset($infos['arguments']) && true === is_array($infos['arguments'])) {
+            foreach($infos['arguments'] as $name => $argument) {
+                $this->addArgument(
+                    $name,
+                    true === isset($argument['optional']) && true === $argument['optional']
+                        ? InputArgument::OPTIONAL
+                        : (
+                            isset($argument['array']) && true === $argument['array']
+                                ? InputArgument::IS_ARRAY
+                                : InputArgument::REQUIRED
+                        ),
+                    true === isset($argument['description']) ? $argument['description'] : null,
+                    true === isset($argument['default']) ? $argument['default'] : null
+                );
+            }
+        }
+        if (true === isset($infos['options']) && true === is_array($infos['options'])) {
+            foreach($infos['options'] as $name => $option) {
+                $this->addOption(
+                    $name,
+                    true === isset($option['shortcut']) ? $option['shortcut'] : null,
+                    true === isset($option['optional']) && true === $option['optional']
+                        ? InputOption::VALUE_OPTIONAL
+                        : (
+                            isset($option['array']) && true === $option['array']
+                                ? InputOption::VALUE_IS_ARRAY
+                                : (
+                                    isset($option['flag']) ? InputOption::VALUE_NONE : InputOption::VALUE_REQUIRED
+                                )
+                        ),
+                    true === isset($option['description']) ? $option['description'] : null,
+                    true === isset($option['default']) ? $option['default'] : null
+                );
+            }
+        }
+
+        return $this;
+    }
+
 }

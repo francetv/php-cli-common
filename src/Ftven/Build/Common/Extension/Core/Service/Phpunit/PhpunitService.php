@@ -9,39 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service;
+namespace Ftven\Build\Common\Extension\Core\Service\Phpunit;
 
-use Ftven\Build\Common\Service\Base\AbstractService;
+use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\SystemServiceAwareTrait;
 
 /**
- * Phpunit Service.
- *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
-class PhpunitService extends AbstractService
+class PhpunitService implements PhpunitServiceInterface
 {
-    /**
-     * @var SystemService
-     */
-    protected $system;
-    /**
-     * @param SystemService $system
-     *
-     * @return $this
-     */
-    public function setSystem($system)
-    {
-        $this->system = $system;
-
-        return $this;
-    }
-    /**
-     * @return SystemService
-     */
-    public function getSystem()
-    {
-        return $this->system;
-    }
+    use SystemServiceAwareTrait;
     /**
      * @param null|string $dir
      *
@@ -50,7 +27,7 @@ class PhpunitService extends AbstractService
     public function hasSupport($dir = null)
     {
         try {
-            list ($output) = $this->getSystem()->execute('bin/phpunit --version', $dir);
+            list ($output) = $this->getSystemService()->execute('bin/phpunit --version', $dir);
 
             if (0 < preg_match('/^PHPUnit\s+[0-9]+\.[0-9]+\.[0-9]+/', $output)) {
                 return true;
@@ -67,7 +44,7 @@ class PhpunitService extends AbstractService
      */
     public function test($dir = null)
     {
-        $this->getSystem()->execute('bin/phpunit', $dir);
+        $this->getSystemService()->execute('bin/phpunit', $dir);
 
         return $this;
     }

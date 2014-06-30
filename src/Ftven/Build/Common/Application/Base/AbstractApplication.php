@@ -11,6 +11,7 @@
 
 namespace Ftven\Build\Common\Application\Base;
 
+use Ftven\Build\Common\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Console\Command\Command;
@@ -19,8 +20,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Config\FileLocator;
 
 /**
- * Abstract Application with short hand methods.
- *
  * @author Olivier Hoareau olivier@phppro.fr>
  */
 abstract class AbstractApplication extends Application
@@ -44,6 +43,27 @@ abstract class AbstractApplication extends Application
         }
 
         parent::__construct(sprintf('ftven-%s', $this->getType()), '@package_version@');
+
+        $this->registerExtensions();
+    }
+    /**
+     * @return ExtensionInterface[]
+     */
+    public function getExtensions()
+    {
+        return [];
+    }
+    /**
+     * @return $this
+     */
+    protected function registerExtensions()
+    {
+        foreach($this->getExtensions() as $extension) {
+            $extension->setApplication($this);
+            $this->addCommands($extension->getDefaultCommands());
+        }
+
+        return $this;
     }
     /**
      * @param ContainerBuilder $container
