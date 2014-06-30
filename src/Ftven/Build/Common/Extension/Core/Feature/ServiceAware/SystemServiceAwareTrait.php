@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Extension\Core\Feature\ServiceAware;
 use Ftven\Build\Common\Extension\Core\Service\System\SystemServiceInterface;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 trait SystemServiceAwareTrait
 {

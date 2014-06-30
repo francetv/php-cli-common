@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Extension\Core\Feature\ServiceAware;
 use Ftven\Build\Common\Extension\Core\Service\Box\BoxServiceInterface;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 trait BoxServiceAwareTrait
 {
@@ -23,7 +23,7 @@ trait BoxServiceAwareTrait
      */
     protected $boxService;
     /**
-     * @param BoxServiceInterface $systemService
+     * @param BoxServiceInterface $boxService
      *
      * @return $this
      */

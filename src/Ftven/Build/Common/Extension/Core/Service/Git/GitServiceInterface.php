@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Extension\Core\Service\Git;
 use RuntimeException;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 interface GitServiceInterface
 {

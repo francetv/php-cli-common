@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Service\UpdateManager;
+namespace Ftven\Build\Common\Service;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-interface UpdateManagerServiceInterface
+class BoxServiceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @param string $version
-     * @param string $manifestFile
-     *
-     * @return $this
-     */
-    public function update($version, $manifestFile);
+    public function testConstruct()
+    {
+        $s = new BoxService();
+
+        $this->assertEquals('Ftven\\Build\\Common\\Service\\BoxService', get_class($s));
+    }
 }

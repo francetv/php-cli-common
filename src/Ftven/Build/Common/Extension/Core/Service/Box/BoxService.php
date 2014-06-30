@@ -16,7 +16,7 @@ use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\SystemServiceAwareTra
 use Ftven\Build\Common\Extension\Core\Feature\StringFormatterTrait;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class BoxService implements BoxServiceInterface
 {

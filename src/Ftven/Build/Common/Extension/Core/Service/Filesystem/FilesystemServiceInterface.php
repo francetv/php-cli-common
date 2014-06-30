@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Extension\Core\Service\Filesystem;
 use RuntimeException;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 interface FilesystemServiceInterface
 {
@@ -45,4 +45,10 @@ interface FilesystemServiceInterface
      * @throws RuntimeException
      */
     public function writeFile($path, $content, $mode = 0666);
+    /**
+     * @param array|string|\Traversable $files
+     *
+     * @return bool
+     */
+    public function exists($files);
 }

@@ -5,7 +5,7 @@ namespace Ftven\Build\Common\Extension\Core\Feature;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 trait SymfonyFilesystemAwareTrait
 {
@@ -31,5 +31,4 @@ trait SymfonyFilesystemAwareTrait
     {
         return $this->filesystem;
     }
-
 }

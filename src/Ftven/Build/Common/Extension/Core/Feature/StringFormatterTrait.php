@@ -3,7 +3,7 @@
 namespace Ftven\Build\Common\Extension\Core\Feature;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 trait StringFormatterTrait
 {

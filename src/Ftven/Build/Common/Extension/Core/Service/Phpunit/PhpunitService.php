@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Extension\Core\Service\Phpunit;
 use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\SystemServiceAwareTrait;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class PhpunitService implements PhpunitServiceInterface
 {

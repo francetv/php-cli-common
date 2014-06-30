@@ -12,7 +12,7 @@
 namespace Ftven\Build\Common\Extension\Core\Service\Box;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 interface BoxServiceInterface
 {

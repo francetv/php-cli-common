@@ -5,7 +5,7 @@ namespace Ftven\Build\Common\Extension\Core\Feature;
 use Symfony\Component\Console\Input\InputInterface;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 trait InputAwareTrait
 {

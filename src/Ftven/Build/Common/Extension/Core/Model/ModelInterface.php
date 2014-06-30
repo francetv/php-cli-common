@@ -9,18 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Service\UpdateManager;
+namespace Ftven\Build\Common\Extension\Core\Model;
+
+use ArrayAccess;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-interface UpdateManagerServiceInterface
+interface ModelInterface extends ArrayAccess
 {
-    /**
-     * @param string $version
-     * @param string $manifestFile
-     *
-     * @return $this
-     */
-    public function update($version, $manifestFile);
 }

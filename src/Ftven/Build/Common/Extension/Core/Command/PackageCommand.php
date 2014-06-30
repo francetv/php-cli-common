@@ -12,10 +12,10 @@
 namespace Ftven\Build\Common\Extension\Core\Command;
 
 use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\BoxServiceAwareTrait;
-use Ftven\Build\Common\Command\Base\AbstractCommand;
+use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
 
 /**
- * @author Olivier Hoareau olivier@phppro.fr>
+ * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class PackageCommand extends AbstractCommand
 {
