@@ -9,29 +9,29 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Model;
+namespace Ftven\Build\Common\Extension\Core\Model;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class BasicModelTest extends \PHPUnit_Framework_TestCase
+class BaseModelTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $model = new BasicModel();
+        $model = new BaseModel();
 
-        $this->assertEquals('Ftven\\Build\\Common\\Model\\BasicModel', get_class($model));
+        $this->assertEquals('Ftven\\Build\\Common\\Extension\\Core\\Model\\BaseModel', get_class($model));
     }
     public function testConstructWithParametersAddParametersToModel()
     {
-        $model1 = new BasicModel(['param1' => 'value1', 'param2' => 'value2']);
+        $model1 = new BaseModel(['param1' => 'value1', 'param2' => 'value2']);
 
         $this->assertArrayHasKey('param1', $model1);
         $this->assertEquals('value1', $model1['param1']);
         $this->assertArrayHasKey('param2', $model1);
         $this->assertEquals('value2', $model1['param2']);
 
-        $model2 = new BasicModel(['param3' => 'value3', 'param4' => 'value4']);
+        $model2 = new BaseModel(['param3' => 'value3', 'param4' => 'value4']);
 
         $this->assertArrayNotHasKey('param1', $model2);
         $this->assertArrayNotHasKey('param2', $model2);
@@ -42,7 +42,7 @@ class BasicModelTest extends \PHPUnit_Framework_TestCase
     }
     public function testConstructWithParametersThatHaveInitMethodDoNotAddParameterToModelButCallInitMethod()
     {
-        $model = new BasicModel(['time' => 'this is the value that will be lost']);
+        $model = new BaseModel(['time' => 'this is the value that will be lost']);
 
         $this->assertArrayHasKey('time', $model);
         $this->assertNotEquals('this is the value that will be lost', $model['time']);

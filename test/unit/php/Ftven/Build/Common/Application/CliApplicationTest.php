@@ -11,7 +11,7 @@
 
 namespace Ftven\Build\Common\Application;
 
-use Ftven\Build\Common\Command\UpdateCommand;
+use Ftven\Build\Common\Extension\Core\Command\UpdateCommand;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>

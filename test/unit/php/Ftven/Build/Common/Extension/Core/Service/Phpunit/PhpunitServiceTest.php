@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service;
+namespace Ftven\Build\Common\Extension\Core\Service\Phpunit;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
@@ -20,6 +20,6 @@ class PhpunitServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new PhpunitService();
 
-        $this->assertEquals('Ftven\\Build\\Common\\Service\\PhpunitService', get_class($s));
+        $this->assertEquals('Ftven\\Build\\Common\\Extension\\Core\\Service\\Phpunit\\PhpunitService', get_class($s));
     }
 }

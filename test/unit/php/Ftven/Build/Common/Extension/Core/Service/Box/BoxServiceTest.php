@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service;
+namespace Ftven\Build\Common\Extension\Core\Service\Box;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
@@ -20,6 +20,6 @@ class BoxServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new BoxService();
 
-        $this->assertEquals('Ftven\\Build\\Common\\Service\\BoxService', get_class($s));
+        $this->assertEquals('Ftven\\Build\\Common\\Extension\\Core\\Service\\Box\\BoxService', get_class($s));
     }
 }
