@@ -50,7 +50,7 @@ class UpdateCommand extends AbstractCommand
     {
         $this->getUpdateManagerService()->update(
             $this->getApplication()->getVersion(),
-            str_replace('{app}', $this->getApplication()->getType(), $this->manifestFilePattern)
+            str_replace('{name}', $this->getApplication()->getName(), $this->manifestFilePattern)
         );
     }
 }

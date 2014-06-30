@@ -18,4 +18,18 @@ use ArrayAccess;
  */
 interface ModelInterface extends ArrayAccess
 {
+    /**
+     * @param array $data
+     */
+    public function __construct($data = []);
+    /**
+     * @return array
+     */
+    public function toArray();
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function getKey($key);
 }

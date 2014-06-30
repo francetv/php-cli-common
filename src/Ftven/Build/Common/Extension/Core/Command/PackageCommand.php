@@ -47,7 +47,7 @@ class PackageCommand extends AbstractCommand
         $copyTo = null;
 
         if (null !== $this->option('install')) {
-            $copyTo = $this->_('/usr/local/bin/%name%', $this->getApplication()->getType());
+            $copyTo = $this->_('/usr/local/bin/%name%', $this->getApplication()->getName());
             if (true === is_string($this->option('install'))) {
                 $copyTo = $this->option('install');
             }
