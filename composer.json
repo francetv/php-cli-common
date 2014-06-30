@@ -1,5 +1,5 @@
 {
-    "name": "ftven/cli-common",
+    "name": "ftven/php-cli-common",
     "require": {
         "php": ">= 5.4.19",
         "symfony/dependency-injection": "*",
@@ -10,23 +10,18 @@
         "symfony/finder": "*",
         "symfony/yaml": "*",
         "guzzlehttp/guzzle": "*",
-        "twig/twig" : "*",
-        "videlalvaro/php-amqplib": "*"
+        "twig/twig" : "*"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
         "herrera-io/phar-update": "*",
         "kherge/box": "*"
     },
-    "license": "Proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Olivier Hoareau",
             "email": "olivier@phppro.fr"
-        },
-        {
-            "name": "Gaël Métais",
-            "email": "gael.metais@gmail.com"
         }
     ],
     "minimum-stability": "stable",
