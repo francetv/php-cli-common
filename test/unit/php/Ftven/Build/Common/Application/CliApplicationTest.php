@@ -48,4 +48,14 @@ class CliApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Ftven\\Build\\Common\\Extension\\Core\\Command\\UpdateCommand', get_class($cmd));
         $this->assertEquals('Updates tool to the latest version', $cmd->getDescription());
     }
+    public function testRunHelp()
+    {
+        $app = new CliApplication();
+
+        $outputMock = $this->getMock('Symfony\\Component\\Console\\Output\\OutputInterface', [], [], '', false);
+
+        $app->setAutoExit(false);
+
+        $this->assertEquals(0, $app->run(null, $outputMock));
+    }
 }

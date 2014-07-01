@@ -17,9 +17,16 @@ use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class PackageCommand extends AbstractCommand
+class PackageCommand extends AbstractCommand implements ConditionalUseInterface
 {
     use BoxServiceAwareTrait;
+    /**
+     * @return bool
+     */
+    public function isUsable()
+    {
+        return $this->getBoxService()->hasSupport();
+    }
     /**
      * @return array
      */

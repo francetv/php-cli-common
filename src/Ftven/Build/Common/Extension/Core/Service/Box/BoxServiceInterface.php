@@ -23,4 +23,8 @@ interface BoxServiceInterface
      * @return string
      */
     public function package($dir = null, $copyTo = null);
+    /**
+     * @return bool
+     */
+    public function hasSupport();
 }
