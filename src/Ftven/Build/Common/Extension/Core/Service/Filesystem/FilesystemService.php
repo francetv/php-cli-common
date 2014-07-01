@@ -47,9 +47,7 @@ class FilesystemService implements FilesystemServiceInterface
      */
     public function readFile($path)
     {
-        file_get_contents($path);
-
-        return $this;
+        return file_get_contents($path);
     }
     /**
      * @param string $path
