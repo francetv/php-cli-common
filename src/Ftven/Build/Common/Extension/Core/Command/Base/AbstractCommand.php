@@ -13,10 +13,10 @@ namespace Ftven\Build\Common\Extension\Core\Command\Base;
 
 use Ftven\Build\Common\Extension\Core\Feature\ApplicationAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\EnvironmentAwareTrait;
-use Ftven\Build\Common\Extension\Core\Feature\InteractiveAwareTrait;
-use Ftven\Build\Common\Feature\StringFormatterTrait;
-use Ftven\Build\Common\Extension\Core\Feature\HelperSetAwareTrait;
 use Symfony\Component\Console\Output\OutputInterface;
+use Ftven\Build\Common\Feature\InteractiveAwareTrait;
+use Ftven\Build\Common\Feature\StringFormatterTrait;
+use Ftven\Build\Common\Feature\HelperSetAwareTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
