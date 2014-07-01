@@ -11,6 +11,7 @@
 
 namespace Ftven\Build\Common\Extension\Core\Service\Box;
 
+use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\FilesystemServiceAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\PhpunitServiceAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\SystemServiceAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\StringFormatterTrait;
@@ -23,6 +24,7 @@ class BoxService implements BoxServiceInterface
     use StringFormatterTrait;
     use SystemServiceAwareTrait;
     use PhpunitServiceAwareTrait;
+    use FilesystemServiceAwareTrait;
     /**
      * @param null|string $dir
      * @param null|string $copyTo
@@ -50,5 +52,12 @@ class BoxService implements BoxServiceInterface
         $this->getSystemService()->execute($this->_('sudo cp %s %s', $file, $copyTo));
 
         return $file;
+    }
+    /**
+     * @return bool
+     */
+    public function hasSupport()
+    {
+        return $this->getFilesystemService()->exists('box.json') && $this->getFilesystemService()->exists('bin/box');
     }
 }

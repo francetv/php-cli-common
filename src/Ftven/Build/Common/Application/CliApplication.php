@@ -80,6 +80,8 @@ class CliApplication extends Application
             $extension->load((array)$this->config, $container);
         }
 
+        $container->compile();
+
         return $this;
     }
     /**

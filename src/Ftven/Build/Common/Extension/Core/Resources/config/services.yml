@@ -18,6 +18,7 @@ parameters:
   common.services.system.class:        Ftven\Build\Common\Extension\Core\Service\System\SystemService
   common.services.phpunit.class:       Ftven\Build\Common\Extension\Core\Service\Phpunit\PhpunitService
   common.services.git.class:           Ftven\Build\Common\Extension\Core\Service\Git\GitService
+  common.services.yaml.class:          Ftven\Build\Common\Extension\Core\Service\Yaml\YamlService
 
 
 services:
@@ -27,14 +28,21 @@ services:
     class: %common.commands.update.class%
     arguments:
       - %update.manifest.location%
+    tags:
+      - {name: cli.command}
+  common.commands.package:
+    class: %common.commands.package.class%
+    tags:
+      - {name: cli.command}
+    calls:
+      - [setBoxService, [@common.services.box]]
+
   symfony.filesystem.filesystem:
     class: %symfony.filesystem.filesystem.class%
   symfony.yaml.yaml:
     class: %symfony.yaml.yaml.class%
   symfony.yaml.parser:
     class: %symfony.yaml.parser.class%
-  common.commands.package:
-    class: %common.commands.package.class%
   common.services.filesystem:
     class: %common.services.filesystem.class%
     calls:
@@ -46,6 +54,7 @@ services:
     calls:
       - [setSystemService, [@common.services.system]]
       - [setPhpunitService, [@common.services.phpunit]]
+      - [setFilesystemService, [@common.services.filesystem]]
   common.services.yaml:
     class: %common.services.yaml.class%
     calls:
