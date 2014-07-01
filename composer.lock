@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/francetv/php-cli-common-lib.git",
-                "reference": "a9d2ca50f0c9891abe3403b78afaee9b2a050cf7"
+                "reference": "f85f5ce3531945f225e46f0973f1dafce2085f9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francetv/php-cli-common-lib/zipball/a9d2ca50f0c9891abe3403b78afaee9b2a050cf7",
-                "reference": "a9d2ca50f0c9891abe3403b78afaee9b2a050cf7",
+                "url": "https://api.github.com/repos/francetv/php-cli-common-lib/zipball/f85f5ce3531945f225e46f0973f1dafce2085f9d",
+                "reference": "f85f5ce3531945f225e46f0973f1dafce2085f9d",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                     "email": "olivier@phppro.fr"
                 }
             ],
-            "time": "2014-07-01 20:18:09"
+            "time": "2014-07-01 21:44:33"
         },
         {
             "name": "guzzlehttp/guzzle",
