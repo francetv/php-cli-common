@@ -9,6 +9,8 @@ parameters:
 
   # services
   symfony.filesystem.filesystem.class: Symfony\Component\Filesystem\Filesystem
+  symfony.yaml.yaml.class:             Symfony\Component\Yaml\Yaml
+  symfony.yaml.parser.class:           Symfony\Component\Yaml\Parser
   common.services.updateManager.class: Herrera\Phar\Update\Manager
 
   common.services.filesystem.class:    Ftven\Build\Common\Extension\Core\Service\Filesystem\FilesystemService
@@ -27,6 +29,10 @@ services:
       - %update.manifest.location%
   symfony.filesystem.filesystem:
     class: %symfony.filesystem.filesystem.class%
+  symfony.yaml.yaml:
+    class: %symfony.yaml.yaml.class%
+  symfony.yaml.parser:
+    class: %symfony.yaml.parser.class%
   common.commands.package:
     class: %common.commands.package.class%
   common.services.filesystem:
@@ -40,6 +46,12 @@ services:
     calls:
       - [setSystemService, [@common.services.system]]
       - [setPhpunitService, [@common.services.phpunit]]
+  common.services.yaml:
+    class: %common.services.yaml.class%
+    calls:
+      - [setFilesystemService, [@common.services.filesystem]]
+      - [setYaml, [@symfony.yaml.yaml]]
+      - [setYamlParser, [@symfony.yaml.parser]]
   common.services.phpunit:
     class: %common.services.phpunit.class%
     calls:
