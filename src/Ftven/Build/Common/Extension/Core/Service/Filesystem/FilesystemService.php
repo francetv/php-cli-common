@@ -75,4 +75,34 @@ class FilesystemService implements FilesystemServiceInterface
     {
         return $this->getFilesystem()->exists($files);
     }
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function deleteFile($path)
+    {
+        if (false === $this->exists($path)) {
+            return $this;
+        }
+
+        $this->getFilesystem()->remove($path);
+
+        return $this;
+    }
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function deleteDirectory($path)
+    {
+        if (false === $this->exists($path)) {
+            return $this;
+        }
+
+        $this->getFilesystem()->remove($path);
+
+        return $this;
+    }
 }
