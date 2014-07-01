@@ -23,6 +23,9 @@
             <exclude>
                 <directory>Resources</directory>
             </exclude>
+            <exclude>
+                <directory suffix="Interface.php">src</directory>
+            </exclude>
         </whitelist>
     </filter>
 

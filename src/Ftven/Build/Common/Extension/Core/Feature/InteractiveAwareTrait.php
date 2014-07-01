@@ -15,6 +15,8 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Question\Question;
+use Ftven\Build\Common\Feature\OutputAwareTrait;
+use Ftven\Build\Common\Feature\InputAwareTrait;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
@@ -22,8 +24,8 @@ use Symfony\Component\Console\Question\Question;
 trait InteractiveAwareTrait
 {
     use HelperSetAwareTrait;
-    use InputAwareTrait;
     use OutputAwareTrait;
+    use InputAwareTrait;
     /**
      * @param $message
      * @param null $default

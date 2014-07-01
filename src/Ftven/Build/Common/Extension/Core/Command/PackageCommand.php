@@ -11,8 +11,8 @@
 
 namespace Ftven\Build\Common\Extension\Core\Command;
 
-use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\BoxServiceAwareTrait;
 use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
+use Ftven\Build\Common\Feature\ServiceAware\BoxServiceAwareTrait;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>

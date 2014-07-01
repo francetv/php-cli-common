@@ -11,7 +11,7 @@
 
 namespace Ftven\Build\Common\Extension\Core\Command;
 
-use Ftven\Build\Common\Extension\Core\Feature\ServiceAware\UpdateManagerServiceAwareTrait;
+use Ftven\Build\Common\Feature\ServiceAware\UpdateManagerServiceAwareTrait;
 use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
 
 /**

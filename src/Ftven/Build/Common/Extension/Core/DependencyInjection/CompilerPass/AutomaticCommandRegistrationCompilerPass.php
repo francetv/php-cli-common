@@ -31,6 +31,7 @@ class AutomaticCommandRegistrationCompilerPass implements CompilerPassInterface
             $command = $container->get($id);
 
             if ($command instanceof ConditionalUseInterface) {
+                /** @var ConditionalUseInterface $command */
                 if (true !== $command->isUsable()) {
                     continue;
                 }
