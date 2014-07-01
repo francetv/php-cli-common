@@ -27,7 +27,7 @@ trait HelperSetAwareTrait
      *
      * @return $this
      */
-    public function setHelperSet($helperSet)
+    public function setHelperSet(HelperSet $helperSet)
     {
         $this->helperSet = $helperSet;
 
@@ -35,9 +35,15 @@ trait HelperSetAwareTrait
     }
     /**
      * @return HelperSet
+     *
+     * @throws \RuntimeException
      */
     public function getHelperSet()
     {
+        if (null === $this->helperSet) {
+            throw new \RuntimeException('Helper Set not set', 500);
+        }
+
         return $this->helperSet;
     }
 }

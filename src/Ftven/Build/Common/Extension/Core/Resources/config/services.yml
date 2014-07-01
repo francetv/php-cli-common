@@ -13,12 +13,13 @@ parameters:
   symfony.yaml.parser.class:           Symfony\Component\Yaml\Parser
   common.services.updateManager.class: Herrera\Phar\Update\Manager
 
-  common.services.filesystem.class:    Ftven\Build\Common\Extension\Core\Service\Filesystem\FilesystemService
-  common.services.box.class:           Ftven\Build\Common\Extension\Core\Service\Box\BoxService
-  common.services.system.class:        Ftven\Build\Common\Extension\Core\Service\System\SystemService
-  common.services.phpunit.class:       Ftven\Build\Common\Extension\Core\Service\Phpunit\PhpunitService
-  common.services.git.class:           Ftven\Build\Common\Extension\Core\Service\Git\GitService
-  common.services.yaml.class:          Ftven\Build\Common\Extension\Core\Service\Yaml\YamlService
+  common.services.filesystem.class:    Ftven\Build\Common\Service\Filesystem\FilesystemService
+  common.services.box.class:           Ftven\Build\Common\Service\Box\BoxService
+  common.services.system.class:        Ftven\Build\Common\Service\System\SystemService
+  common.services.phpunit.class:       Ftven\Build\Common\Service\Phpunit\PhpunitService
+  common.services.git.class:           Ftven\Build\Common\Service\Git\GitService
+  common.services.yaml.class:          Ftven\Build\Common\Service\Yaml\YamlService
+  common.services.json.class:          Ftven\Build\Common\Service\Json\JsonService
 
 
 services:
@@ -65,6 +66,8 @@ services:
     class: %common.services.phpunit.class%
     calls:
       - [setSystemService, [@common.services.system]]
+  common.services.json:
+    class: %common.services.json.class%
   common.services.git:
     class: %common.services.git.class%
     calls:

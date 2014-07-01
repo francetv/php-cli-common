@@ -4,8 +4,54 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5f6f19c463f614b0e153c37cfc987988",
+    "hash": "c3d0510be8502769166f67082d403f71",
     "packages": [
+        {
+            "name": "ftven/php-cli-common-lib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/francetv/php-cli-common-lib.git",
+                "reference": "a9d2ca50f0c9891abe3403b78afaee9b2a050cf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/francetv/php-cli-common-lib/zipball/a9d2ca50f0c9891abe3403b78afaee9b2a050cf7",
+                "reference": "a9d2ca50f0c9891abe3403b78afaee9b2a050cf7",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "*",
+                "php": ">= 5.4.19",
+                "symfony/console": "*",
+                "symfony/filesystem": "*",
+                "symfony/finder": "*",
+                "symfony/yaml": "*",
+                "twig/twig": "*"
+            },
+            "require-dev": {
+                "herrera-io/phar-update": "*",
+                "kherge/box": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Hoareau",
+                    "email": "olivier@phppro.fr"
+                }
+            ],
+            "time": "2014-07-01 20:18:09"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "4.1.2",
@@ -2098,12 +2144,12 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
+    "stability-flags": {
+        "ftven/php-cli-common-lib": 20
+    },
+    "platform": [
 
     ],
-    "platform": {
-        "php": ">= 5.4.19"
-    },
     "platform-dev": [
 
     ]

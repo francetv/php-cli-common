@@ -27,7 +27,7 @@ trait ContainerBuilderAwareTrait
      *
      * @return $this
      */
-    public function setContainerBuilder($containerBuilder)
+    public function setContainerBuilder(ContainerBuilder $containerBuilder)
     {
         $this->containerBuilder = $containerBuilder;
 
@@ -35,9 +35,15 @@ trait ContainerBuilderAwareTrait
     }
     /**
      * @return ContainerBuilder
+     *
+     * @throws \RuntimeException
      */
     public function getContainerBuilder()
     {
+        if (null === $this->containerBuilder) {
+            throw new \RuntimeException('Container Builder not set', 500);
+        }
+
         return $this->containerBuilder;
     }
 }

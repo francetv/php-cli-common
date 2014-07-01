@@ -1,16 +1,10 @@
 {
     "name": "ftven/php-cli-common",
     "require": {
-        "php": ">= 5.4.19",
+        "ftven/php-cli-common-lib": "dev-master",
         "symfony/dependency-injection": "*",
         "symfony/http-foundation": "*",
-        "symfony/filesystem": "*",
-        "symfony/console": "*",
-        "symfony/config": "*",
-        "symfony/finder": "*",
-        "symfony/yaml": "*",
-        "guzzlehttp/guzzle": "*",
-        "twig/twig" : "*"
+        "symfony/config": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

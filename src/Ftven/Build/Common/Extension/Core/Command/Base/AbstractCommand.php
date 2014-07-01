@@ -14,17 +14,17 @@ namespace Ftven\Build\Common\Extension\Core\Command\Base;
 use Ftven\Build\Common\Extension\Core\Feature\ApplicationAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\EnvironmentAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\InteractiveAwareTrait;
-use Ftven\Build\Common\Extension\Core\Feature\StringFormatterTrait;
+use Ftven\Build\Common\Feature\StringFormatterTrait;
 use Ftven\Build\Common\Extension\Core\Feature\HelperSetAwareTrait;
-use Ftven\Build\Common\Extension\Core\Feature\OutputAwareTrait;
-use Ftven\Build\Common\Extension\Core\Feature\InputAwareTrait;
-use Ftven\Build\Common\Extension\Core\Feature\SluggerTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Ftven\Build\Common\Feature\OutputAwareTrait;
+use Ftven\Build\Common\Feature\InputAwareTrait;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Command\Command;
+use Ftven\Build\Common\Feature\SluggerTrait;
 use Symfony\Component\Console\Application;
 
 /**

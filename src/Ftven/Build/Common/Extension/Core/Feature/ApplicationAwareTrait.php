@@ -27,7 +27,7 @@ trait ApplicationAwareTrait
      *
      * @return $this
      */
-    public function setApplication($application)
+    public function setApplication(Application $application)
     {
         $this->application = $application;
 
@@ -35,9 +35,15 @@ trait ApplicationAwareTrait
     }
     /**
      * @return Application
+     *
+     * @throws \RuntimeException
      */
     public function getApplication()
     {
+        if (null === $this->application) {
+            throw new \RuntimeException('Application not set', 500);
+        }
+
         return $this->application;
     }
 }
