@@ -51,4 +51,16 @@ interface FilesystemServiceInterface
      * @return bool
      */
     public function exists($files);
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function deleteFile($path);
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function deleteDirectory($path);
 }

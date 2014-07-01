@@ -48,9 +48,18 @@ abstract class AbstractCommand extends Command
         $this->setInput($input);
         $this->setOutput($output);
 
+        $this->init();
+
         if (!ini_get('date.timezone')) {
             ini_set('date.timezone', 'Europe/Paris');
         }
+    }
+    /**
+     * @return $this
+     */
+    protected function init()
+    {
+        return $this;
     }
     /**
      * @param OutputInterface $output
