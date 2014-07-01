@@ -13,31 +13,30 @@ namespace Ftven\Build\Common\Extension\Core;
 
 use Ftven\Build\Common\Extension\Core\DependencyInjection\CompilerPass\AutomaticCommandRegistrationCompilerPass;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Extension\Extension;
+use Ftven\Build\Common\Extension\Core\Base\AbstractExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Config\FileLocator;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class CoreExtension extends Extension
+class CoreExtension extends AbstractExtension
 {
     /**
-     * Loads a specific configuration.
+     * @param YamlFileLoader $loader
      *
-     * @param array $config An array of configuration values
-     * @param ContainerBuilder $container A ContainerBuilder instance
-     *
-     * @throws \InvalidArgumentException When provided tag is not defined in this extension
-     *
-     * @api
+     * @return $this|void
      */
-    public function load(array $config, ContainerBuilder $container)
+    protected function registerConfigFiles(YamlFileLoader $loader)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/Resources/config'));
         $loader->load('services.yml');
-
+    }
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return $this|void
+     */
+    protected function registerCompilerPasses(ContainerBuilder $container)
+    {
         $container->addCompilerPass(new AutomaticCommandRegistrationCompilerPass());
     }
 }
