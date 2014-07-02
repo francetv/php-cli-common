@@ -53,9 +53,10 @@ services:
   common.services.box:
     class: %common.services.box.class%
     calls:
-      - [setSystemService, [@common.services.system]]
-      - [setPhpunitService, [@common.services.phpunit]]
+      - [setSystemService,     [@common.services.system]]
+      - [setPhpunitService,    [@common.services.phpunit]]
       - [setFilesystemService, [@common.services.filesystem]]
+      - [setJsonService,       [@common.services.json]]
   common.services.yaml:
     class: %common.services.yaml.class%
     calls:
@@ -68,6 +69,8 @@ services:
       - [setSystemService, [@common.services.system]]
   common.services.json:
     class: %common.services.json.class%
+    calls:
+      - [setFilesystemService, [@common.services.filesystem]]
   common.services.git:
     class: %common.services.git.class%
     calls:

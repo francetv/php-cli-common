@@ -80,9 +80,22 @@ class CliApplication extends Application
             $extension->load((array)$this->config, $container);
         }
 
-        $container->compile();
-
         return $this;
+    }
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    protected function configureIO(InputInterface $input, OutputInterface $output)
+    {
+        parent::configureIO($input, $output);
+
+        $container = $this->getContainerBuilder();
+        $container->set('common.services.output', $output);
+        $container->set('common.services.input', $input);
+        $container->set('common.services.helperSet', $this->getHelperSet());
+
+        $container->compile();
     }
     /**
      * @param InputInterface $input
