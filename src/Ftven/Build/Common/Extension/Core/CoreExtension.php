@@ -12,6 +12,7 @@
 namespace Ftven\Build\Common\Extension\Core;
 
 use Ftven\Build\Common\Extension\Core\DependencyInjection\CompilerPass\AutomaticCommandRegistrationCompilerPass;
+use Ftven\Build\Common\Service\Templating\TemplatingServiceInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Ftven\Build\Common\Extension\Core\Base\AbstractExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -38,5 +39,14 @@ class CoreExtension extends AbstractExtension
     protected function registerCompilerPasses(ContainerBuilder $container)
     {
         $container->addCompilerPass(new AutomaticCommandRegistrationCompilerPass());
+    }
+    /**
+     * @param TemplatingServiceInterface $templateService
+     *
+     * @return $this|void
+     */
+    protected function registerTemplates(TemplatingServiceInterface $templateService)
+    {
+        $templateService->addRepository(__DIR__ . '/Resources/templates');
     }
 }

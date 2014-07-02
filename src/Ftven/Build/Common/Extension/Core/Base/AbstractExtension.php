@@ -11,6 +11,7 @@
 
 namespace Ftven\Build\Common\Extension\Core\Base;
 
+use Ftven\Build\Common\Service\Templating\TemplatingServiceInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -56,6 +57,17 @@ abstract class AbstractExtension extends Extension
         return $this;
     }
     /**
+     * @param TemplatingServiceInterface $templateService
+     *
+     * @return $this
+     */
+    protected function registerTemplates(TemplatingServiceInterface $templateService)
+    {
+        unset($templateService);
+
+        return $this;
+    }
+    /**
      * Loads a specific configuration.
      *
      * @param array $config An array of configuration values
@@ -81,5 +93,9 @@ abstract class AbstractExtension extends Extension
         $application = $container->get('application');
 
         $this->registerCommands($application);
+
+        /** @var TemplatingServiceInterface $templatingService */
+        $templatingService = $container->get('common.services.templating');
+        $this->registerTemplates($templatingService);
     }
 }

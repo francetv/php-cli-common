@@ -39,6 +39,7 @@ class CliApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($app->has('update'));
 
         $app->loadExtensions();
+        $app->getContainerBuilder()->compile();
 
         $this->assertTrue($app->has('update'));
 
