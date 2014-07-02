@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Command;
+namespace Ftven\Build\Cli\Extension\Core\Command;
 
-use Ftven\Build\Common\Extension\Core\Command\Base\AbstractCommand;
 use Ftven\Build\Common\Feature\ServiceAware\BoxServiceAwareTrait;
+use Ftven\Build\Cli\Extension\Core\Command\Base\AbstractCommand;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>

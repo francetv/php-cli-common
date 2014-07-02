@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core;
+namespace Ftven\Build\Cli\Extension\Core;
 
-use Ftven\Build\Common\Extension\Core\DependencyInjection\CompilerPass\AutomaticCommandRegistrationCompilerPass;
+use Ftven\Build\Cli\Extension\Core\DependencyInjection\CompilerPass\AutomaticCommandRegistrationCompilerPass;
 use Ftven\Build\Common\Service\Templating\TemplatingServiceInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Ftven\Build\Common\Extension\Core\Base\AbstractExtension;
+use Ftven\Build\Cli\Extension\Core\Base\AbstractExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**

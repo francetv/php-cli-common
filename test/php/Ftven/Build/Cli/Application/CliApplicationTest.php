@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Application;
+namespace Ftven\Build\Cli\Application;
 
-use Ftven\Build\Common\Extension\Core\Command\UpdateCommand;
+use Ftven\Build\Cli\Extension\Core\Command\UpdateCommand;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
@@ -46,7 +46,7 @@ class CliApplicationTest extends \PHPUnit_Framework_TestCase
         /** @var UpdateCommand $cmd */
         $cmd = $app->get('update');
 
-        $this->assertEquals('Ftven\\Build\\Common\\Extension\\Core\\Command\\UpdateCommand', get_class($cmd));
+        $this->assertEquals('Ftven\\Build\\Cli\\Extension\\Core\\Command\\UpdateCommand', get_class($cmd));
         $this->assertEquals('Updates tool to the latest version', $cmd->getDescription());
     }
     public function testRunHelp()

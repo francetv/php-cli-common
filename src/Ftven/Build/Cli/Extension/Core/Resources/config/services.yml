@@ -4,8 +4,8 @@ parameters:
   update.manifest.location: "http://mycompany.com/{name}/manifest.json"
 
   # commands
-  common.commands.update.class:  Ftven\Build\Common\Extension\Core\Command\UpdateCommand
-  common.commands.package.class: Ftven\Build\Common\Extension\Core\Command\PackageCommand
+  common.commands.update.class:  Ftven\Build\Cli\Extension\Core\Command\UpdateCommand
+  common.commands.package.class: Ftven\Build\Cli\Extension\Core\Command\PackageCommand
 
   # services
   symfony.filesystem.filesystem.class: Symfony\Component\Filesystem\Filesystem

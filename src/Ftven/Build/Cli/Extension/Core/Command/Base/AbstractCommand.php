@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Command\Base;
+namespace Ftven\Build\Cli\Extension\Core\Command\Base;
 
-use Ftven\Build\Common\Extension\Core\Feature\EnvironmentAwareTrait;
+use Ftven\Build\Cli\Extension\Core\Feature\EnvironmentAwareTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ftven\Build\Common\Feature\InteractiveAwareTrait;
 use Ftven\Build\Common\Feature\StringFormatterTrait;
