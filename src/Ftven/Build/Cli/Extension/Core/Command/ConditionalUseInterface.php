@@ -1,6 +1,6 @@
 <?php
 
-namespace Ftven\Build\Common\Extension\Core\Command;
+namespace Ftven\Build\Cli\Extension\Core\Command;
 
 interface ConditionalUseInterface
 {

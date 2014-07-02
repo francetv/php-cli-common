@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Feature;
+namespace Ftven\Build\Cli\Extension\Core\Feature;
 
 use Symfony\Component\Console\Application;
 

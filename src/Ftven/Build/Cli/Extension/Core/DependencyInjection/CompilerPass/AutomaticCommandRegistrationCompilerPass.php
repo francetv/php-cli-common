@@ -1,9 +1,9 @@
 <?php
 
-namespace Ftven\Build\Common\Extension\Core\DependencyInjection\CompilerPass;
+namespace Ftven\Build\Cli\Extension\Core\DependencyInjection\CompilerPass;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Ftven\Build\Common\Extension\Core\Command\ConditionalUseInterface;
+use Ftven\Build\Cli\Extension\Core\Command\ConditionalUseInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Application;

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Extension\Core\Base;
+namespace Ftven\Build\Cli\Extension\Core\Base;
 
 use Ftven\Build\Common\Service\Templating\TemplatingServiceInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Ftven\Build\Common\Application\CliApplication;
+use Ftven\Build\Cli\Application\CliApplication;
 use Symfony\Component\Config\FileLocator;
 
 /**

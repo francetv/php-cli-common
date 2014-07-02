@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Application;
+namespace Ftven\Build\Cli\Application;
 
-use Ftven\Build\Common\Extension\Core\Feature\ContainerBuilderAwareTrait;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Ftven\Build\Cli\Extension\Core\Feature\ContainerBuilderAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Console\Output\OutputInterface;
-use Ftven\Build\Common\Extension\Core\CoreExtension;
+use Ftven\Build\Cli\Extension\Core\CoreExtension;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Application;
