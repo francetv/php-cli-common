@@ -11,6 +11,8 @@ parameters:
   symfony.filesystem.filesystem.class: Symfony\Component\Filesystem\Filesystem
   symfony.yaml.yaml.class:             Symfony\Component\Yaml\Yaml
   symfony.yaml.parser.class:           Symfony\Component\Yaml\Parser
+  twig.environment.class:              Twig_Environment
+  twig.loaders.filesystem.class:       Twig_Loader_Filesystem
   common.services.updateManager.class: Herrera\Phar\Update\Manager
 
   common.services.filesystem.class:    Ftven\Build\Common\Service\Filesystem\FilesystemService
@@ -20,6 +22,7 @@ parameters:
   common.services.git.class:           Ftven\Build\Common\Service\Git\GitService
   common.services.yaml.class:          Ftven\Build\Common\Service\Yaml\YamlService
   common.services.json.class:          Ftven\Build\Common\Service\Json\JsonService
+  common.services.templating.class:    Ftven\Build\Common\Service\Templating\TemplatingService
 
 
 services:
@@ -38,6 +41,12 @@ services:
     calls:
       - [setBoxService, [@common.services.box]]
 
+  twig.environment:
+    class: %twig.environment.class%
+    arguments:
+      - @twig.loaders.filesystem
+  twig.loaders.filesystem:
+    class: %twig.loaders.filesystem.class%
   symfony.filesystem.filesystem:
     class: %symfony.filesystem.filesystem.class%
   symfony.yaml.yaml:
@@ -53,9 +62,10 @@ services:
   common.services.box:
     class: %common.services.box.class%
     calls:
-      - [setSystemService, [@common.services.system]]
-      - [setPhpunitService, [@common.services.phpunit]]
+      - [setSystemService,     [@common.services.system]]
+      - [setPhpunitService,    [@common.services.phpunit]]
       - [setFilesystemService, [@common.services.filesystem]]
+      - [setJsonService,       [@common.services.json]]
   common.services.yaml:
     class: %common.services.yaml.class%
     calls:
@@ -68,8 +78,14 @@ services:
       - [setSystemService, [@common.services.system]]
   common.services.json:
     class: %common.services.json.class%
+    calls:
+      - [setFilesystemService, [@common.services.filesystem]]
   common.services.git:
     class: %common.services.git.class%
     calls:
       - [setSystemService, [@common.services.system]]
+  common.services.templating:
+    class: %common.services.templating.class%
+    calls:
+      - [setTwig, [@twig.environment]]
 

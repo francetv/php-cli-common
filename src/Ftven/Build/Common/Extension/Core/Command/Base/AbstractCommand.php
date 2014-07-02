@@ -11,7 +11,6 @@
 
 namespace Ftven\Build\Common\Extension\Core\Command\Base;
 
-use Ftven\Build\Common\Extension\Core\Feature\ApplicationAwareTrait;
 use Ftven\Build\Common\Extension\Core\Feature\EnvironmentAwareTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ftven\Build\Common\Feature\InteractiveAwareTrait;
@@ -33,10 +32,16 @@ use Symfony\Component\Console\Application;
 abstract class AbstractCommand extends Command
 {
     use InteractiveAwareTrait;
-    use ApplicationAwareTrait;
     use EnvironmentAwareTrait;
     use StringFormatterTrait;
     use SluggerTrait;
+    /**
+     * @return Application
+     */
+    public function getApplication()
+    {
+        return parent::getApplication();
+    }
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
