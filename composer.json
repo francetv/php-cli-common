@@ -1,27 +1,41 @@
 {
-    "name": "ftven/php-cli-common",
+    "name": "ftven/cli-common",
+    "description": "Common CLI helpers classes",
+    "keywords": ["ftven", "common", "cli"],
+    "homepage": "https://github.com/francetv/php-cli-common",
     "require": {
-        "ftven/php-cli-common-lib": "dev-master",
-        "symfony/dependency-injection": "*",
-        "symfony/http-foundation": "*",
-        "symfony/config": "*"
+        "ftven/common-lib": "1.*",
+        "symfony/dependency-injection": "2.5.*",
+        "symfony/http-foundation": "2.5.*",
+        "symfony/config": "2.5.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "herrera-io/phar-update": "*",
+        "phpunit/phpunit": "4.*",
         "kherge/box": "*"
     },
     "license": "MIT",
     "authors": [
         {
             "name": "Olivier Hoareau",
-            "email": "olivier@phppro.fr"
+            "email": "olivier@phppro.fr",
+            "homepage": "http://www.phppro.fr",
+            "role": "Lead Developer"
         }
     ],
+    "support": {
+        "email": "olivier@phppro.fr"
+    },
     "minimum-stability": "stable",
+    "suggest": {
+        "ftven/php-cli-amqp-extension": "AMQP helpers classes for CLI Tools",
+        "ftven/php-cli-indus": "Indus CLI Tool",
+        "ftven/php-cli-team": "Team CLI Tool",
+        "ftven/php-cli-testing": "Testing CLI Tool (AMQP Test Platform)",
+        "ftven/php-cli-audit": "Audit CLI Tool"
+    },
     "autoload": {
-        "psr-0": {
-            "": "src/"
+        "psr-4": {
+            "Ftven\\Build\\Cli\\": "src/"
         }
     },
     "config": {

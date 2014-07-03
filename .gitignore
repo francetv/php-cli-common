@@ -11,11 +11,7 @@
 
 ### Tools
 
-/bin/phpmd
-/bin/phpcpd
-/bin/phpcs
 /bin/phpunit
-/bin/pdepend
 /bin/box
 /bin/jsonlint
 /bin/validate-json
