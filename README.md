@@ -7,12 +7,12 @@ Add the dependency in your composer.json :
     ...
     "require": {
         ...
-        "ftven/php-cli-common": "dev-master"
+        "ftven/cli-common": "1.*"
     }
 
 Then update your dependency :
 
-    $ ./composer.phar update ftven/php-cli-common
+    $ ./composer.phar update ftven/cli-common
 
 Then you can use it directly in your scripts :
 
@@ -22,7 +22,7 @@ Then you can use it directly in your scripts :
 
     require_once '/path/to/vendor/autoload.php';
 
-    $cli = new Ftven\Build\Application\CliApplication('mytool', '1.0.0');
+    $cli = new Ftven\Build\Cli\Application\CliApplication('mytool', '1.0.0');
 
     $cli->addExtension(new MyNamespace\MyExtension());
 
