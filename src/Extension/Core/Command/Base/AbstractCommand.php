@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Cli-common package.
+ * This file is part of the CLI COMMON package.
  *
  * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
  *
