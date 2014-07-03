@@ -109,4 +109,17 @@ class CliApplication extends Application
 
         return parent::run($input, $output);
     }
+    /**
+     * @param string $name
+     *
+     * @return int|mixed
+     */
+    public static function runApplication($name)
+    {
+        $class = sprintf('Ftven\\Build\\Cli\\Application\\%sApplication', ucfirst($name));
+
+        /** @var CliApplication $application */
+        $application = new $class;
+        return $application->run();
+    }
 }
