@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Cli-common package.
+ * This file is part of the CLI COMMON package.
  *
  * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
  *
@@ -19,6 +19,7 @@ use Ftven\Build\Cli\Extension\Core\CoreExtension;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Application;
+use Composer\Autoload\ClassLoader;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
@@ -35,6 +36,10 @@ class CliApplication extends Application
      */
     protected $config;
     /**
+     * @var ClassLoader
+     */
+    protected $classLoader;
+    /**
      * @param string $name    The name of the application
      * @param string $version The version of the application
      */
@@ -49,6 +54,24 @@ class CliApplication extends Application
         $this->config     = new \ArrayObject();
 
         $this->addExtension(new CoreExtension());
+    }
+    /**
+     * @param ClassLoader $classLoader
+     *
+     * @return $this
+     */
+    public function setClassLoader(ClassLoader $classLoader)
+    {
+        $this->classLoader = $classLoader;
+
+        return $this;
+    }
+    /**
+     * @return ClassLoader
+     */
+    public function getClassLoader()
+    {
+        return $this->classLoader;
     }
     /**
      * @return ExtensionInterface[]
@@ -111,15 +134,23 @@ class CliApplication extends Application
     }
     /**
      * @param string $name
+     * @param mixed  $classLoader
      *
      * @return int|mixed
      */
-    public static function runApplication($name)
+    public static function runApplication($name, ClassLoader $classLoader = null)
     {
         $class = sprintf('Ftven\\Build\\Cli\\Application\\%sApplication', ucfirst($name));
 
         /** @var CliApplication $application */
         $application = new $class;
+
+        if (null !== $classLoader) {
+            if (method_exists($application, 'setClassLoader')) {
+                $application->setClassLoader($classLoader);
+            }
+        }
+
         return $application->run();
     }
 }

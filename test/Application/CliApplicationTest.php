@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Cli-common package.
+ * This file is part of the CLI COMMON package.
  *
  * (c) France Télévisions Editions Numériques <guillaume.postaire@francetv.fr>
  *
@@ -58,5 +58,17 @@ class CliApplicationTest extends \PHPUnit_Framework_TestCase
         $app->setAutoExit(false);
 
         $this->assertEquals(0, $app->run(null, $outputMock));
+    }
+    public function testContainerServices()
+    {
+        $app = new CliApplication();
+
+        $app->loadExtensions();
+        $app->getContainerBuilder()->compile();
+
+        foreach($app->getContainerBuilder()->getDefinitions() as $id => $definition) {
+            $object = $app->getContainerBuilder()->get($id);
+            $this->assertNotNull($object);
+        }
     }
 }

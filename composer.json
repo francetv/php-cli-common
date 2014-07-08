@@ -11,6 +11,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",
+        "squizlabs/php_codesniffer": "1.*",
         "kherge/box": "*"
     },
     "license": "MIT",
@@ -27,11 +28,11 @@
     },
     "minimum-stability": "stable",
     "suggest": {
-        "ftven/php-cli-amqp-extension": "AMQP helpers classes for CLI Tools",
-        "ftven/php-cli-indus": "Indus CLI Tool",
-        "ftven/php-cli-team": "Team CLI Tool",
-        "ftven/php-cli-testing": "Testing CLI Tool (AMQP Test Platform)",
-        "ftven/php-cli-audit": "Audit CLI Tool"
+        "ftven/cli-amqp-extension": "AMQP helpers classes for CLI Tools",
+        "ftven/cli-indus": "Indus CLI Tool",
+        "ftven/cli-team": "Team CLI Tool",
+        "ftven/cli-testing": "Testing CLI Tool (AMQP Test Platform)",
+        "ftven/cli-audit": "Audit CLI Tool"
     },
     "autoload": {
         "psr-4": {

@@ -1,5 +1,7 @@
 # PHP CLI COMMON
 
+[![Build Status](https://travis-ci.org/francetv/php-cli-common.svg?branch=master)](https://travis-ci.org/francetv/php-cli-common)
+
 ## Usage
 
 Add the dependency in your composer.json :

@@ -10,9 +10,11 @@ parameters:
   # services
   symfony.filesystem.filesystem.class: Symfony\Component\Filesystem\Filesystem
   symfony.yaml.yaml.class:             Symfony\Component\Yaml\Yaml
+  symfony.yaml.dumper.class:           Symfony\Component\Yaml\Dumper
   symfony.yaml.parser.class:           Symfony\Component\Yaml\Parser
   twig.environment.class:              Twig_Environment
   twig.loaders.filesystem.class:       Twig_Loader_Filesystem
+  guzzlehttp.client.class :            GuzzleHttp\Client
   common.services.updateManager.class: Herrera\Phar\Update\Manager
 
   common.services.filesystem.class:    Ftven\Build\Common\Service\Filesystem\FilesystemService
@@ -23,6 +25,8 @@ parameters:
   common.services.yaml.class:          Ftven\Build\Common\Service\Yaml\YamlService
   common.services.json.class:          Ftven\Build\Common\Service\Json\JsonService
   common.services.templating.class:    Ftven\Build\Common\Service\Templating\TemplatingService
+  common.services.email.class:         Ftven\Build\Common\Service\Email\EmailService
+  common.services.http.class:          Ftven\Build\Common\Service\Http\HttpService
 
 
 services:
@@ -51,8 +55,12 @@ services:
     class: %symfony.filesystem.filesystem.class%
   symfony.yaml.yaml:
     class: %symfony.yaml.yaml.class%
+  symfony.yaml.dumper:
+    class: %symfony.yaml.dumper.class%
   symfony.yaml.parser:
     class: %symfony.yaml.parser.class%
+  guzzlehttp.client:
+    class: %guzzlehttp.client.class%
   common.services.filesystem:
     class: %common.services.filesystem.class%
     calls:
@@ -70,7 +78,7 @@ services:
     class: %common.services.yaml.class%
     calls:
       - [setFilesystemService, [@common.services.filesystem]]
-      - [setYaml, [@symfony.yaml.yaml]]
+      - [setYamlDumper, [@symfony.yaml.dumper]]
       - [setYamlParser, [@symfony.yaml.parser]]
   common.services.phpunit:
     class: %common.services.phpunit.class%
@@ -88,4 +96,10 @@ services:
     class: %common.services.templating.class%
     calls:
       - [setTwig, [@twig.environment]]
+  common.services.email:
+    class: %common.services.email.class%
+  common.services.http:
+    class: %common.services.http.class%
+    calls:
+      - [setGuzzleClient, [@guzzlehttp.client]]
 
