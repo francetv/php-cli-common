@@ -59,4 +59,16 @@ class CliApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(0, $app->run(null, $outputMock));
     }
+    public function testContainerServices()
+    {
+        $app = new CliApplication();
+
+        $app->loadExtensions();
+        $app->getContainerBuilder()->compile();
+
+        foreach($app->getContainerBuilder()->getDefinitions() as $id => $definition) {
+            $object = $app->getContainerBuilder()->get($id);
+            $this->assertNotNull($object);
+        }
+    }
 }

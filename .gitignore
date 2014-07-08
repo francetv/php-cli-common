@@ -7,7 +7,7 @@
 
 /vendor/
 /composer.phar
-
+/composer.lock
 
 ### Tools
 
@@ -15,7 +15,8 @@
 /bin/box
 /bin/jsonlint
 /bin/validate-json
+/bin/phpcs
 
 ### QA
 
-/reports/
+/report/
