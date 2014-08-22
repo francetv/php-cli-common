@@ -28,10 +28,6 @@
     },
     "minimum-stability": "stable",
     "suggest": {
-        "ftven/cli-amqp-extension": "AMQP helpers classes for CLI Tools",
-        "ftven/cli-indus": "Indus CLI Tool",
-        "ftven/cli-team": "Team CLI Tool",
-        "ftven/cli-testing": "Testing CLI Tool (AMQP Test Platform)",
         "ftven/cli-audit": "Audit CLI Tool"
     },
     "autoload": {
