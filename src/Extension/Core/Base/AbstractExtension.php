@@ -12,6 +12,8 @@
 namespace Ftven\Build\Cli\Extension\Core\Base;
 
 use Ftven\Build\Common\Service\Templating\TemplatingServiceInterface;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -57,6 +59,52 @@ abstract class AbstractExtension extends Extension
         return $this;
     }
     /**
+     * @param YamlFileLoader $loader
+     *
+     * @return $this
+     */
+    protected function registerYamlConfigFiles(YamlFileLoader $loader)
+    {
+        unset($loader);
+
+        return $this;
+    }
+    /**
+     * @param XmlFileLoader $loader
+     *
+     * @return $this
+     */
+    protected function registerXmlConfigFiles(XmlFileLoader $loader)
+    {
+        unset($loader);
+
+        return $this;
+    }
+    /**
+     * @param PhpFileLoader $loader
+     *
+     * @return $this
+     */
+    protected function registerPhpConfigFiles(PhpFileLoader $loader)
+    {
+        unset($loader);
+
+        return $this;
+    }
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     *
+     * @return $this
+     */
+    protected function registerCustom(ContainerBuilder $container, array $config)
+    {
+        unset($container);
+        unset($config);
+
+        return $this;
+    }
+    /**
      * @param TemplatingServiceInterface $templateService
      *
      * @return $this
@@ -81,12 +129,26 @@ abstract class AbstractExtension extends Extension
     {
         $rClass = new \ReflectionClass($this);
 
-        $loader = new YamlFileLoader(
+        $yamlLoader = new YamlFileLoader(
             $container,
             new FileLocator(dirname($rClass->getFileName()) . '/Resources/config')
         );
 
-        $this->registerConfigFiles($loader);
+        $xmlLoader = new XmlFileLoader(
+            $container,
+            new FileLocator(dirname($rClass->getFileName()) . '/Resources/config')
+        );
+
+        $phpLoader = new PhpFileLoader(
+            $container,
+            new FileLocator(dirname($rClass->getFileName()) . '/Resources/config')
+        );
+
+        $this->registerCustom($container, $config);
+        $this->registerConfigFiles($yamlLoader);
+        $this->registerYamlConfigFiles($yamlLoader);
+        $this->registerXmlConfigFiles($xmlLoader);
+        $this->registerPhpConfigFiles($phpLoader);
         $this->registerCompilerPasses($container);
 
         /** @var CliApplication $application */
